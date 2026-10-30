@@ -1,0 +1,1614 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="logo-cabidino.png">
+<style>[hidden]:not([hidden=until-found i]){display:none!important}body{margin:0}</style>
+<title>Cabidino Loja Infantil</title>
+<meta name="description" content="Cabidino, loja infantil: roupas delicadas para crianças de 1 a 14 anos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Fredoka:wght@400;500;600&family=Nunito:wght@400;600;700&display=swap">
+<style>
+/* Layout: loja online profissional (barra de avisos, menu com busca, vitrine em cards) com a identidade da Cabidino:
+   logo original, creme, rosé e sálvia, e o Dino e a Dina flutuando num céu de estrelas no fundo.
+   Tema único claro, de propósito: a logo é uma imagem com fundo creme e precisa ficar exatamente igual. */
+:root {
+  --creme: #FEF5F0;
+  --papel: #FFFFFF;
+  --nevoa: #F6EEE9;
+  --tinta: #4A3E3B;
+  --tinta-suave: #7A6A63;
+  --linha: #EEE2DB;
+  --ouro: #C2A06A;
+  --ouro-texto: #8C6A36;
+  --rosa: #9A505C;
+  --rosa-faixa: #A35C67;
+  --blush: #F0BDB8;
+  --blush-claro: #FBE3DF;
+  --salvia: #A9B79E;
+  --salvia-fundo: #EEF1E7;
+  --botao: #9A505C;
+  --botao-texto: #FFFFFF;
+  --sombra: 0 20px 44px -26px rgba(90, 60, 50, .38);
+  --sombra-leve: 0 6px 18px -10px rgba(90, 60, 50, .35);
+
+  /* cores dos mascotes, tiradas da logo */
+  --dino-corpo: #C3CEB4;
+  --dino-contorno: #8D9B80;
+  --dino-espinho: #A6B497;
+  --dino-barriga: #E6EBD9;
+  --dina-corpo: #F7D5CE;
+  --dina-contorno: #D59A97;
+  --dina-espinho: #EDB1AC;
+  --dina-barriga: #FCE9E3;
+  --olho: #3E3431;
+  --bochecha: #F2ADA6;
+  --laco: #F0A9AF;
+  --capacete: #CFE0EA;
+
+  /* céu do fundo */
+  --estrela: #E8CD93;
+  --brilho: #F3BDB6;
+  --planeta: #F5D2CB;
+  --planeta-faixa: #EEBBB4;
+  --anel: #D7BC88;
+  --lua: #F6E6C2;
+  --lua-cratera: #EAD3A2;
+
+  --f-titulo: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --f-fofa: "Fredoka", "Nunito", system-ui, sans-serif;
+  --f-texto: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --raio: 24px;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--creme); color: var(--tinta);
+  font-family: var(--f-texto); font-size: 16px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--creme); }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--ouro); outline-offset: 3px; border-radius: 8px; }
+h1, h2, h3 { font-family: var(--f-titulo); font-weight: 500; line-height: 1.08; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+.so-leitor { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.cont {
+  max-width: 1240px; margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.kicker {
+  font-family: var(--f-fofa); font-weight: 500; font-size: .82rem;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ouro-texto);
+  display: inline-flex; align-items: center; gap: .7em;
+}
+.kicker::before, .kicker::after { content: ""; width: 9px; height: 8px; background: var(--blush);
+  clip-path: path("M4.5 8S0 5.2 0 2.3A2.3 2.3 0 0 1 4.5 1.4 2.3 2.3 0 0 1 9 2.3C9 5.2 4.5 8 4.5 8z"); }
+.secao { position: relative; padding-block: clamp(56px, 8vw, 100px); }
+.secao-topo { display: grid; gap: 14px; justify-items: center; text-align: center; margin-bottom: 36px; }
+.secao-topo h2 { font-size: clamp(2.1rem, 4.4vw, 3.2rem); }
+.secao-topo p { color: var(--tinta-suave); max-width: 52ch; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5em;
+  min-height: 50px; padding: 0 1.7em; border-radius: 999px; border: 1px solid transparent;
+  background: var(--botao); color: var(--botao-texto); text-decoration: none; cursor: pointer;
+  font-family: var(--f-fofa); font-weight: 500; font-size: 1rem; letter-spacing: .01em;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: var(--sombra); }
+.btn-linha { background: color-mix(in srgb, var(--papel) 70%, transparent); color: var(--tinta); border-color: var(--ouro); }
+.btn-linha:hover { background: var(--papel); }
+
+/* ---------- Céu do fundo: dinos, lua, Saturno e estrelas ---------- */
+.ceu { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+/* iluminação suave: manchas de luz quentes que "respiram" devagar */
+.luz { position: absolute; border-radius: 50%; filter: blur(64px); opacity: .8; animation: respirar 14s ease-in-out infinite; }
+.luz.l1 { width: 48vw; height: 48vw; left: -12vw; top: -10vw; background: #FFDCC6; }
+.luz.l2 { width: 40vw; height: 40vw; right: -10vw; top: 28vh; background: #F8D2DC; animation-delay: -5s; }
+.luz.l3 { width: 46vw; height: 46vw; left: 25vw; bottom: -22vw; background: #E2EDD3; animation-delay: -9s; }
+.luz.l4 { width: 30vw; height: 30vw; left: 38vw; top: 6vh; background: #FFEBC4; animation-delay: -3s; }
+.luz.l5 { width: 22vw; height: 22vw; left: 6vw; top: 55vh; background: #FFE6B8; animation-delay: -7s; }
+@keyframes respirar { 0%, 100% { transform: scale(1); opacity: .7; } 50% { transform: scale(1.15) translate(2vw, -1vw); opacity: 1; } }
+.poeira { position: absolute; width: var(--s, 3px); height: var(--s, 3px); border-radius: 50%; background: #FFE7B5;
+  box-shadow: 0 0 8px 2px rgba(255, 220, 150, .95), 0 0 16px 4px rgba(255, 220, 150, .35); animation: cintilar var(--t, 4s) ease-in-out var(--d, 0s) infinite; }
+@keyframes cintilar { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .2; transform: scale(.4); } }
+.astro { position: absolute; animation: flutuar var(--t, 12s) ease-in-out var(--d, 0s) infinite; }
+.astro svg { display: block; width: 100%; height: auto; overflow: visible; }
+.astro.espelho svg { transform: scaleX(-1); }
+.astro.pisca { animation: piscar var(--t, 3s) ease-in-out var(--d, 0s) infinite; }
+.astro.pisca svg { filter: drop-shadow(0 0 6px rgba(255, 214, 140, 1)) drop-shadow(0 0 14px rgba(255, 205, 130, .7)); }
+.astro.brilha svg { filter: drop-shadow(0 0 12px rgba(255, 228, 196, 1)) drop-shadow(0 0 28px rgba(255, 196, 170, .65)); }
+.astro.bicho svg { filter: drop-shadow(0 0 10px rgba(255, 255, 255, .95)) drop-shadow(0 0 22px rgba(255, 236, 214, .6)); }
+/* brincadeiras dos dinos: cambalhota e voltinha */
+.astro.girar { animation: cambalhota var(--t, 16s) linear var(--d, 0s) infinite; }
+.astro.orbita { animation: voltinha var(--t, 14s) linear var(--d, 0s) infinite; }
+@keyframes cambalhota {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(var(--x, 20px), -34px) rotate(180deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
+}
+@keyframes voltinha {
+  from { transform: rotate(0deg) translateX(46px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(46px) rotate(-360deg); }
+}
+/* estrelas cadentes */
+.cometa {
+  position: absolute; width: 150px; height: 2px; border-radius: 2px; opacity: 0;
+  background: linear-gradient(90deg, #FFFFFF, #FFE3B0 30%, transparent);
+  box-shadow: 0 0 10px 1px rgba(255, 226, 170, .9);
+  animation: cadente var(--t, 11s) ease-out var(--d, 0s) infinite;
+}
+.cometa::before { content: ""; position: absolute; left: -3px; top: -3px; width: 8px; height: 8px; border-radius: 50%; background: #fff; box-shadow: 0 0 12px 4px rgba(255, 230, 180, .95); }
+@keyframes cadente {
+  0% { transform: translate(0, 0) rotate(-25deg); opacity: 0; }
+  2% { opacity: 1; }
+  12% { transform: translate(-46vw, 21vw) rotate(-25deg); opacity: 0; }
+  100% { transform: translate(-46vw, 21vw) rotate(-25deg); opacity: 0; }
+}
+@keyframes flutuar {
+  0%, 100% { transform: translate(0, 0) rotate(var(--r1, -8deg)); }
+  50% { transform: translate(var(--x, 14px), -28px) rotate(var(--r2, 8deg)); }
+}
+@keyframes piscar { 0%, 100% { transform: scale(1); opacity: var(--o, .8); } 50% { transform: scale(.55) rotate(20deg); opacity: calc(var(--o, .8) * .4); } }
+.util, .topo, .recados, .barra-dino, main, .rodape { position: relative; z-index: 1; }
+
+/* ---------- Barra de cima ---------- */
+.util { background: var(--blush-claro); font-size: .8rem; }
+.util .cont { display: flex; justify-content: flex-end; gap: 26px; padding-block: 6px; }
+.util a { text-decoration: none; color: var(--tinta-suave); }
+.util a:hover { color: var(--rosa); }
+
+/* ---------- Topo ---------- */
+.topo { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--creme); border-bottom: 1px solid var(--linha); }
+.topo-linha { display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: 28px; padding-block: 8px; }
+.logo-topo img { height: 60px; width: auto; max-width: none; }
+.menu { display: flex; justify-content: center; gap: 20px; list-style: none; margin: 0; padding: 0; font-family: var(--f-fofa); font-weight: 500; font-size: 1rem; }
+.menu a { text-decoration: none; color: var(--rosa); white-space: nowrap; padding-block: 6px; border-bottom: 2px solid transparent; transition: border-color .2s, color .2s; }
+.menu a:hover { border-color: var(--blush); }
+.busca { position: relative; width: 260px; }
+.busca input {
+  width: 100%; height: 46px; padding: 0 46px 0 16px; border-radius: 12px; border: 1px solid var(--linha); background: var(--nevoa);
+  font-size: .9rem; color: var(--tinta);
+}
+.busca input::placeholder { color: var(--tinta-suave); }
+.busca input:focus { outline: none; border-color: var(--ouro); background: var(--papel); }
+.busca button { position: absolute; right: 4px; top: 4px; width: 38px; height: 38px; border: 0; background: none; cursor: pointer; color: var(--rosa); display: grid; place-items: center; }
+.busca svg { width: 20px; height: 20px; }
+.icones { display: flex; gap: 6px; }
+.icone {
+  position: relative; width: 44px; height: 44px; border-radius: 50%; border: 0; background: none; cursor: pointer;
+  display: grid; place-items: center; color: var(--rosa); transition: background .2s;
+}
+.icone:hover { background: var(--blush-claro); }
+.icone svg { width: 24px; height: 24px; }
+.contador {
+  position: absolute; top: 2px; right: 0; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px;
+  background: var(--botao); color: var(--botao-texto); font-size: .68rem; font-weight: 700; display: grid; place-items: center;
+  font-variant-numeric: tabular-nums;
+}
+.contador[data-zero="true"] { display: none; }
+.contador.pulo { animation: pulo .5s ease; }
+.menu-movel { display: none; }
+
+/* ---------- Faixa de recados ---------- */
+.recados { background: var(--rosa-faixa); color: #fff; }
+.recados .cont { display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; min-height: 40px; }
+.recados button { width: 40px; height: 40px; border: 0; background: none; color: #fff; cursor: pointer; display: grid; place-items: center; }
+.recados button svg { width: 16px; height: 16px; }
+.recado { text-align: center; font-family: var(--f-fofa); font-weight: 500; font-size: .92rem; transition: opacity .3s; }
+.recado.trocando { opacity: 0; }
+
+/* ---------- Hero ---------- */
+.hero { padding-block: clamp(28px, 4vw, 48px) clamp(40px, 6vw, 72px); }
+.hero-centro { position: relative; isolation: isolate; display: grid; justify-items: center; text-align: center; gap: 16px; }
+/* luz creme atrás da logo e da frase: os astros do fundo somem de leve aqui */
+.hero-centro::before {
+  content: ""; position: absolute; z-index: -1; left: 50%; top: 46%; width: min(980px, 130%); height: 130%;
+  transform: translate(-50%, -50%); pointer-events: none;
+  background: radial-gradient(closest-side, var(--creme) 0%, var(--creme) 58%, color-mix(in srgb, var(--creme) 70%, transparent) 78%, transparent 100%);
+}
+.logo-hero { width: min(620px, 100%); height: auto; }
+.hero-frase { font-family: var(--f-titulo); font-size: clamp(1.55rem, 3vw, 2.15rem); line-height: 1.25; max-width: 34ch; }
+.hero-frase em { color: var(--rosa); }
+.hero-sub { font-family: var(--f-fofa); font-size: .98rem; color: var(--tinta-suave); margin-top: -6px; }
+.acoes { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 4px; }
+
+.bento {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: repeat(2, minmax(230px, auto));
+  gap: 16px; margin-top: clamp(32px, 5vw, 52px);
+}
+.b { position: relative; border-radius: var(--raio); overflow: hidden; min-width: 0; }
+.b-foto { display: block; padding: 0; border: 0; cursor: pointer; background: var(--nevoa); text-align: left; }
+.b-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 14%; transition: transform .7s ease; }
+.b-foto:hover img { transform: scale(1.05); }
+.b-grande { grid-row: span 2; min-height: 440px; }
+.b-tag {
+  position: absolute; left: 14px; bottom: 14px; display: grid; padding: 10px 16px;
+  border-radius: 18px; background: color-mix(in srgb, var(--papel) 92%, transparent);
+}
+.b-tag b { font-family: var(--f-titulo); font-weight: 600; font-size: 1.15rem; }
+.b-tag span { font-family: var(--f-fofa); font-size: .88rem; color: var(--rosa); }
+.b-selo {
+  position: absolute; top: 14px; left: 14px; padding: 5px 12px; border-radius: 999px; background: var(--blush-claro); color: var(--rosa);
+  font-family: var(--f-fofa); font-weight: 500; font-size: .74rem; letter-spacing: .12em; text-transform: uppercase;
+}
+.rodape .barra-dino { background: transparent; border: 0; }.b-dinos {
+  background: radial-gradient(120% 80% at 50% 0%, #FFFFFF 0%, var(--salvia-fundo) 70%);
+  border: 1px solid var(--linha); display: grid; align-content: center; justify-items: center; gap: 10px; padding: 22px 14px; text-align: center;
+}
+/* fala do Dino no cartão: pequena e discreta, com um rabinho de balão */
+.b-dinos .balao {
+  position: relative; max-width: 190px; margin-bottom: 8px; padding: 5px 13px; border-radius: 999px;
+  font-family: var(--f-titulo); font-style: italic; font-size: .98rem; line-height: 1.3; color: var(--rosa);
+  background: color-mix(in srgb, var(--papel) 88%, transparent); border-color: color-mix(in srgb, var(--ouro) 45%, transparent);
+  box-shadow: 0 4px 12px -8px rgba(90, 60, 50, .35);
+}
+.b-dinos .balao::after {
+  content: ""; position: absolute; left: 50%; bottom: -4px; width: 7px; height: 7px; margin-left: -3.5px;
+  background: inherit; border: inherit; border-width: 0 1px 1px 0; transform: rotate(45deg);
+}
+.cabide-mini { width: 120px; height: auto; color: var(--ouro); }
+.par { position: relative; display: flex; align-items: flex-end; justify-content: center; gap: 6px; width: 100%; }
+.par button { padding: 0; border: 0; background: none; cursor: pointer; width: 40%; max-width: 130px; }
+.par button svg { display: block; width: 100%; height: auto; overflow: visible; }
+.par button:hover svg, .par button.feliz svg { animation: pulinho .6s ease; }
+/* coraçãozinho discreto entre os dois, como no verso do cartão */
+.par .coracao-meio { position: absolute; left: 50%; top: 28%; width: 13px; height: auto; color: var(--blush); transform: translateX(-50%); }
+.feito { font-family: var(--f-fofa); font-size: .78rem; letter-spacing: .22em; color: var(--ouro-texto); }
+/* ---------- Joguinho: Pula, Dino! (faixa do rodapé) ---------- */
+.jogo-area { position: relative; min-height: 190px; overflow: hidden; cursor: pointer; outline: none; }
+.jogo-area:focus-visible { box-shadow: inset 0 0 0 2px var(--ouro); }
+.jogo-chao {
+  position: absolute; left: 0; right: 0; bottom: 20px; height: 2px; opacity: .7;
+  background: repeating-linear-gradient(90deg, var(--ouro) 0 12px, transparent 12px 22px);
+}
+.jogo-area.correndo .jogo-chao { animation: chao .5s linear infinite; }
+@keyframes chao { to { background-position: -22px 0; } }
+.jogo-dino { position: absolute; left: 12%; bottom: 20px; width: 58px; will-change: transform; }
+.jogo-dino svg { display: block; width: 100%; height: auto; overflow: visible; }
+.jogo-area.correndo .jogo-dino svg { animation: andar .35s ease-in-out infinite; }
+.jogo-area.pulando .jogo-dino svg { animation: none; transform: rotate(-10deg); }
+.cactinho { position: absolute; bottom: 20px; will-change: transform; }
+.cactinho svg { display: block; width: 100%; height: auto; overflow: visible; }
+.jogo-dina { position: absolute; right: 10px; top: 4px; display: flex; align-items: flex-start; gap: 2px; pointer-events: none; }
+.jogo-dina svg { width: 54px; height: auto; overflow: visible; }
+.jogo-dina svg.feliz { animation: pulinho .5s ease; }
+.jogo-fala { background: var(--papel); border: 1px solid var(--linha); border-radius: 14px 14px 4px 14px; padding: 5px 10px; font-family: var(--f-fofa); font-size: .78rem; margin-top: 4px; max-width: 130px; }
+.coracao-jogo { position: absolute; width: 14px; color: var(--blush); pointer-events: none; animation: subir .9s ease-out forwards; }
+@keyframes subir { to { transform: translateY(-40px); opacity: 0; } }
+
+/* ---------- Faixa do Dino, logo abaixo dos recados ---------- */
+.barra-dino { position: relative; z-index: 1; border-bottom: 1px solid var(--linha);
+  background: linear-gradient(90deg, #F3F5EC 0%, #FDF3EC 50%, #FBE6E6 100%); }
+.barra-dino .jogo-area { min-height: 118px; }
+.barra-dino .jogo-chao { bottom: 14px; }
+.barra-dino .jogo-dino { left: 4%; bottom: 14px; width: 42px; }
+.barra-dino .cactinho { bottom: 14px; }
+.barra-dino .jogo-dina { top: auto; bottom: 12px; right: 0; align-items: center; }
+.barra-dino .jogo-dina svg { width: 44px; }
+.barra-dino .jogo-fala { margin: 0 0 18px; font-size: .74rem; }
+.barra-placar { position: absolute; left: 0; top: 8px; z-index: 2; font-family: var(--f-fofa); font-size: .78rem; color: var(--tinta-suave); font-variant-numeric: tabular-nums; }
+.barra-placar b { color: var(--rosa); font-weight: 600; }
+.barra-dica {
+  position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%); z-index: 2; white-space: nowrap;
+  font-family: var(--f-fofa); font-size: .9rem; color: var(--rosa); background: color-mix(in srgb, var(--papel) 85%, transparent);
+  padding: 6px 14px; border-radius: 999px; box-shadow: var(--sombra-leve); pointer-events: none;
+}
+@media (max-width: 560px) {
+  .barra-dica { font-size: .78rem; white-space: normal; text-align: center; width: max-content; max-width: 62%; }
+  .barra-dino .jogo-fala { display: none; }
+}
+.balao {
+  width: max-content; max-width: 230px; background: var(--papel); color: var(--tinta);
+  border: 1px solid var(--linha); border-radius: 18px; padding: 9px 14px;
+  font-family: var(--f-fofa); font-size: .92rem; line-height: 1.3; box-shadow: var(--sombra);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.balao.trocando { opacity: 0; transform: translateY(4px); }
+@keyframes pulinho { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-14px); } 70% { transform: translateY(2px); } }
+@keyframes pulo { 40% { transform: scale(1.35); } }
+@keyframes andar { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-3px) rotate(3deg); } }
+
+/* ---------- Promessas ---------- */
+.promessas { border-block: 1px solid var(--linha); background: color-mix(in srgb, var(--papel) 85%, transparent); }
+.promessas ul { list-style: none; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-block: 22px; }
+.promessas li { display: flex; align-items: center; justify-content: center; gap: 12px; font-family: var(--f-fofa); font-size: .98rem; color: var(--tinta-suave); text-align: left; }
+.promessas svg { width: 30px; height: 30px; flex: none; color: var(--ouro); }
+
+/* ---------- Fases (idades) ---------- */
+.fases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.fase {
+  display: grid; justify-items: center; align-content: start; gap: 4px; padding: 12px 12px 22px;
+  background: color-mix(in srgb, var(--papel) 92%, transparent); border: 1px solid var(--linha); border-radius: 999px 999px var(--raio) var(--raio);
+  text-align: center; cursor: pointer; transition: transform .25s ease, box-shadow .25s ease, border-color .25s;
+}
+.fase:hover { transform: translateY(-6px); box-shadow: var(--sombra); border-color: var(--ouro); }
+.fase-foto { position: relative; width: 100%; aspect-ratio: 3 / 4; margin-bottom: 18px; }
+.fase-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; border-radius: 999px 999px 18px 18px; transition: transform .6s ease; }
+.fase-foto.sem-foto { display: grid; place-items: center; border-radius: 999px 999px 18px 18px;
+  background: radial-gradient(70% 60% at 50% 45%, #FFFFFF 0%, var(--salvia-fundo) 75%); }
+.fase-foto.sem-foto svg { width: 62%; height: auto; overflow: visible; }
+.fase:hover .fase-foto img { transform: scale(1.02); }
+/* Dino ou Dina espiando no canto de cada foto */
+.fase-dino { position: absolute; right: -8px; bottom: -18px; width: 64px; height: auto; overflow: visible; filter: drop-shadow(0 4px 6px rgba(90, 60, 50, .2)); }
+.fase:hover .fase-dino { animation: pulinho .6s ease; }
+.fase h3 { font-size: 1.55rem; }
+.fase .idade { font-family: var(--f-fofa); color: var(--rosa); font-size: 1rem; }
+.fase .fase-qtd { font-size: .85rem; color: var(--tinta-suave); }
+
+/* ---------- Vitrine ---------- */
+.barra-filtros { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 26px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--linha); background: var(--papel);
+  font-family: var(--f-fofa); font-size: .92rem; cursor: pointer; transition: all .2s;
+}
+.chip:hover { border-color: var(--ouro); }
+.chip[aria-pressed="true"] { background: var(--rosa); color: #fff; border-color: var(--rosa); }
+.ordem { display: flex; align-items: center; gap: 10px; font-family: var(--f-fofa); font-size: .9rem; color: var(--tinta-suave); }
+.ordem select {
+  min-height: 40px; padding: 0 12px; border-radius: 12px; border: 1px solid var(--linha); background: var(--papel); color: var(--tinta);
+  font-family: var(--f-texto); font-size: .92rem;
+}
+.resultado-busca { display: flex; align-items: center; gap: 10px; margin: -8px 0 22px; font-size: .95rem; color: var(--tinta-suave); }
+.resultado-busca button { border: 0; background: none; color: var(--rosa); text-decoration: underline; cursor: pointer; padding: 0; }
+
+.grade { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px 20px; }
+.card { display: grid; gap: 0; align-content: start; min-width: 0; background: var(--papel); border-radius: 20px; box-shadow: var(--sombra-leve); overflow: hidden; }
+.card-foto { position: relative; aspect-ratio: 3 / 3.9; background: var(--nevoa); }
+.card-abrir { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+.card-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%; transition: transform .6s ease; }
+.card:hover .card-foto img { transform: scale(1.04); }
+.fav {
+  position: absolute; top: 12px; right: 12px; width: 42px; height: 42px; border-radius: 50%; border: 0; cursor: pointer;
+  background: var(--papel); color: var(--rosa); display: grid; place-items: center; box-shadow: var(--sombra-leve); transition: transform .2s;
+}
+.fav:hover { transform: scale(1.08); }
+.fav svg { width: 20px; height: 20px; }
+.fav svg { fill: transparent; transition: fill .2s; }
+.fav[aria-pressed="true"] svg { fill: currentColor; }
+.fav.pulo { animation: pulo .45s ease; }
+.selo {
+  position: absolute; left: 10px; right: 10px; bottom: 10px; min-height: 30px; border-radius: 999px; display: grid; place-items: center;
+  background: var(--blush-claro); color: var(--rosa); font-family: var(--f-fofa); font-weight: 500; font-size: .78rem; letter-spacing: .1em;
+  transition: opacity .25s;
+}
+.card-tams {
+  position: absolute; left: 10px; right: 10px; bottom: 10px; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap;
+  opacity: 0; transform: translateY(6px); transition: all .25s ease; pointer-events: none;
+}
+.card-tams span {
+  min-width: 30px; height: 30px; padding: 0 6px; border-radius: 999px; background: var(--papel); display: grid; place-items: center;
+  font-family: var(--f-fofa); font-size: .8rem; box-shadow: var(--sombra-leve);
+}
+.card:hover .selo { opacity: 0; }
+.card:hover .card-tams { opacity: 1; transform: none; }
+.card-info { display: grid; gap: 6px; padding: 14px 16px 18px; text-align: left; border: 0; background: none; cursor: pointer; width: 100%; }
+.card-nome { font-family: var(--f-fofa); font-weight: 500; font-size: 1rem; line-height: 1.3; color: var(--tinta); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.card-preco { font-family: var(--f-fofa); font-weight: 600; font-size: 1.12rem; color: var(--rosa); font-variant-numeric: tabular-nums; }
+.card-sub { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: .86rem; color: var(--tinta-suave); }
+.preco { font-family: var(--f-fofa); font-weight: 500; font-size: 1.05rem; color: var(--rosa); font-variant-numeric: tabular-nums; }
+.bolinhas { display: flex; gap: 5px; }
+.bolinha { width: 14px; height: 14px; border-radius: 50%; border: 1px solid var(--linha); flex: none; }
+.vazio-vitrine { grid-column: 1 / -1; display: grid; justify-items: center; gap: 10px; padding: 40px 10px; text-align: center; color: var(--tinta-suave); }
+.vazio-vitrine svg { width: 120px; height: auto; overflow: visible; }
+.mais { display: grid; justify-items: center; gap: 10px; margin-top: 40px; color: var(--tinta-suave); font-size: .9rem; }
+
+/* ---------- Dicas do Dino ---------- */
+.dicas { background: color-mix(in srgb, var(--salvia-fundo) 88%, transparent); }
+.dicas-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
+.dicas-arte { display: grid; justify-items: center; gap: 14px; }
+.dicas-arte svg { width: min(72%, 280px); height: auto; overflow: visible; }
+/* a Dina cresce junto com a idade escolhida (a escala vem do script) */
+#dina-cresce { transform-origin: 50% 100%; transform: scaleX(-1) scale(var(--cresce, .6)); transition: transform .45s cubic-bezier(.34, 1.56, .64, 1); }
+.dicas-arte .balao { max-width: 280px; font-size: 1.02rem; padding: 14px 18px; }
+.dicas-texto { display: grid; gap: 20px; justify-items: start; min-width: 0; }
+.dicas-texto h2 { font-size: clamp(2.1rem, 4.4vw, 3.2rem); }
+.dicas-texto > p { color: var(--tinta-suave); max-width: 50ch; }
+.idade-caixa { width: 100%; max-width: 480px; background: var(--papel); border: 1px solid var(--linha); border-radius: var(--raio); padding: 22px; display: grid; gap: 14px; }
+.idade-caixa label { font-family: var(--f-fofa); font-size: .95rem; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.idade-num { font-family: var(--f-titulo); font-size: 2.4rem; line-height: 1; color: var(--rosa); font-variant-numeric: tabular-nums; }
+.idade-caixa input[type="range"] { width: 100%; accent-color: var(--botao); }
+.regua { display: flex; justify-content: space-between; font-size: .75rem; color: var(--tinta-suave); font-variant-numeric: tabular-nums; }
+.resultado { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.resultado div { background: var(--nevoa); border-radius: 14px; padding: 10px 14px; display: grid; gap: 2px; }
+.resultado small { font-size: .75rem; color: var(--tinta-suave); text-transform: uppercase; letter-spacing: .1em; }
+.resultado b { font-family: var(--f-fofa); font-weight: 500; font-size: 1.1rem; }
+.nota { font-size: .82rem; color: var(--tinta-suave); }
+
+/* ---------- Rodapé (inspirado no verso do cartão) ---------- */
+.rodape { background: none; }
+.rodape-base { background: color-mix(in srgb, var(--papel) 94%, transparent); }
+.rodape-topo { border-top: 1px solid var(--linha); }
+.rodape-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 40px; padding-block: 56px 36px; align-items: start; }
+.rodape-grid > div { display: grid; gap: 12px; align-content: start; min-width: 0; }
+.rodape h4 { margin: 0 0 2px; font-family: var(--f-fofa); font-weight: 500; font-size: .85rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ouro-texto); }
+.rodape a, .rodape p { font-size: .95rem; color: var(--tinta-suave); text-decoration: none; }
+.rodape a:hover { color: var(--rosa); }
+.rodape-logo { width: min(260px, 100%); }
+.contato { display: flex; align-items: center; gap: 12px; }
+.contato .ic { width: 34px; height: 34px; flex: none; border-radius: 50%; border: 1px solid var(--blush); display: grid; place-items: center; color: var(--rosa); }
+.contato .ic svg { width: 16px; height: 16px; }
+.contato span { font-family: var(--f-fofa); color: var(--ouro-texto); font-size: .98rem; overflow-wrap: anywhere; }
+a.contato[href] span:last-child { text-decoration: underline; text-decoration-color: var(--blush); text-underline-offset: 4px; }
+a.contato[href]:hover span:last-child { color: var(--rosa); text-decoration-color: var(--rosa); }
+.zap-linha { display: flex; align-items: center; gap: 4px; }
+.contato-zap { gap: 12px; }
+/* ícone sem círculo, mas na mesma "coluna" de 34px dos outros contatos, para o texto alinhar */
+.zap-icone { width: 19px; height: 19px; flex: none; margin-inline: 7.5px; color: var(--ouro-texto); transition: color .2s; }
+.contato-zap:hover .zap-icone { color: var(--rosa); }
+/* rabinho de dinossauro apontando para o botão, balançando: o "clique aqui" da Cabidino */
+.rabinho { display: grid; justify-items: center; gap: 0; pointer-events: none; }
+.rabinho svg { width: 40px; height: auto; overflow: visible; transform-origin: 100% 60%; animation: abanar 1.4s ease-in-out infinite; }
+.rabinho span { font-family: var(--f-fofa); font-size: .7rem; color: var(--rosa); margin-top: -2px; white-space: nowrap; }
+@keyframes abanar { 0%, 100% { transform: rotate(0deg) translateX(0); } 50% { transform: rotate(-12deg) translateX(-4px); } }
+.casal { display: grid; justify-items: center; gap: 4px; }
+.casal .cabide-mini { width: 150px; }
+.casal .par button { width: 42%; max-width: 110px; }
+.rodape .lema { font-family: var(--f-titulo); font-style: italic; font-size: 1.25rem; color: var(--rosa); margin-top: 6px; }
+.legal { border-top: 1px solid var(--linha); padding-block: 18px; font-size: .8rem; color: var(--tinta-suave); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+
+/* ---------- Janelas (produto e sacola) ---------- */
+dialog { border: 0; padding: 0; color: var(--tinta); background: var(--papel); }
+dialog::backdrop { background: rgba(40, 28, 26, .45); backdrop-filter: blur(3px); }
+.janela-produto { width: min(920px, calc(100% - 32px)); max-height: calc(100% - 32px); border-radius: 26px; box-shadow: var(--sombra); }
+.jp-grid { display: grid; grid-template-columns: 1fr 1fr; }
+.jp-foto { background: var(--nevoa); min-height: 100%; }
+.jp-foto img { width: 100%; height: 100%; max-height: 640px; object-fit: cover; object-position: 50% 12%; }
+.jp-info { display: grid; gap: 16px; align-content: start; padding: 32px 30px 28px; min-width: 0; }
+.jp-info h3 { font-size: 2.2rem; }
+.jp-info .preco { font-size: 1.4rem; }
+.jp-parcela { font-size: .9rem; color: var(--tinta-suave); margin-top: -10px; }
+.jp-desc { color: var(--tinta-suave); font-size: .95rem; }
+.grupo { display: grid; gap: 8px; }
+.grupo-rotulo { font-family: var(--f-fofa); font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-suave); }
+.opcoes { display: flex; flex-wrap: wrap; gap: 8px; }
+.opcao {
+  min-height: 42px; min-width: 46px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--linha); background: var(--creme);
+  display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-family: var(--f-fofa); font-size: .92rem; text-transform: capitalize;
+}
+.opcao[aria-pressed="true"] { border-color: var(--rosa); box-shadow: inset 0 0 0 1px var(--rosa); background: var(--papel); }
+.dica-mini { display: flex; gap: 10px; align-items: center; background: var(--salvia-fundo); border-radius: 14px; padding: 10px 12px; font-size: .88rem; }
+.dica-mini svg { width: 46px; height: auto; flex: none; overflow: visible; }
+.qtd { display: inline-flex; align-items: center; border: 1px solid var(--linha); border-radius: 999px; }
+.qtd button { width: 42px; height: 42px; border: 0; background: none; cursor: pointer; font-size: 1.2rem; }
+.qtd span { min-width: 28px; text-align: center; font-family: var(--f-fofa); font-variant-numeric: tabular-nums; }
+.jp-acoes { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.jp-acoes .btn { flex: 1; }
+.fechar {
+  position: absolute; top: 14px; right: 14px; width: 42px; height: 42px; border-radius: 50%; z-index: 2;
+  border: 1px solid var(--linha); background: var(--papel); cursor: pointer; display: grid; place-items: center;
+}
+.fechar svg { width: 16px; height: 16px; }
+
+.janela-sacola {
+  margin: 0 0 0 auto; width: min(430px, 100%); height: 100%; max-height: 100%;
+  padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); padding-right: env(safe-area-inset-right, 0px);
+}
+.janela-sacola[open] { animation: entrar .3s ease; }
+@keyframes entrar { from { transform: translateX(40px); opacity: 0; } }
+.sacola-corpo { display: grid; grid-template-rows: auto auto 1fr auto; height: 100%; }
+.sacola-topo { display: flex; align-items: center; justify-content: space-between; padding: 22px 22px 14px; }
+.sacola-topo h3 { font-size: 1.9rem; }
+.sacola-topo .fechar { position: static; }
+.frete { margin: 0 22px; padding: 14px 16px 12px; border-radius: 16px; background: var(--salvia-fundo); display: grid; gap: 10px; font-size: .88rem; }
+.trilha { position: relative; height: 8px; border-radius: 999px; background: var(--papel); margin-top: 26px; }
+.trilha-cheia { position: absolute; inset: 0 auto 0 0; border-radius: inherit; background: var(--salvia); transition: width .5s ease; }
+.trilha-dino { position: absolute; bottom: 2px; width: 42px; transform: translateX(-50%); transition: left .5s ease; }
+.trilha-dino svg { width: 100%; height: auto; overflow: visible; animation: andar .7s ease-in-out infinite; }
+.trilha-meta { position: absolute; right: -4px; bottom: -6px; width: 18px; color: var(--rosa); }
+.itens { overflow-y: auto; padding: 14px 22px; display: grid; gap: 14px; align-content: start; }
+.item { display: grid; grid-template-columns: 74px 1fr auto; gap: 12px; align-items: center; }
+.item img { width: 74px; height: 96px; object-fit: cover; object-position: top; border-radius: 12px; }
+.item-info { display: grid; gap: 2px; min-width: 0; }
+.item-info b { font-family: var(--f-fofa); font-size: 1rem; font-weight: 500; }
+.item-info small { color: var(--tinta-suave); font-size: .82rem; text-transform: capitalize; }
+.item-lado { display: grid; justify-items: end; gap: 6px; }
+.item-lado .qtd button { width: 32px; height: 32px; font-size: 1rem; }
+.remover { border: 0; background: none; font-size: .78rem; color: var(--tinta-suave); text-decoration: underline; cursor: pointer; padding: 0; }
+.vazia { display: grid; justify-items: center; gap: 12px; text-align: center; padding: 30px 10px; color: var(--tinta-suave); }
+.vazia svg { width: 120px; height: auto; overflow: visible; }
+.sacola-rodape { border-top: 1px solid var(--linha); padding: 18px 22px 22px; display: grid; gap: 12px; }
+.total { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--f-fofa); }
+.total b { font-size: 1.35rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+.aviso-zap { font-size: .82rem; color: var(--rosa); text-align: center; }
+
+.toast {
+  position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); z-index: 50;
+  background: var(--tinta); color: var(--creme); padding: 12px 20px; border-radius: 999px; font-family: var(--f-fofa); font-size: .95rem;
+  opacity: 0; pointer-events: none; transition: all .3s ease;
+}
+.toast.ver { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- Promoção, estoque, cupom e painel ---------- */
+.secao-topo h2 em, .dicas-texto h2 em { color: var(--rosa); }
+.card-precos { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.preco-antigo { font-size: .85rem; color: var(--tinta-suave); font-family: var(--f-texto); font-weight: 400; }
+.selo-promo { background: var(--rosa); color: #fff; }
+.selo-esgotado { background: var(--tinta); color: var(--creme); }
+.card-esgotado .card-foto img { filter: grayscale(.6); opacity: .7; }
+.card-esgotado:hover .selo { opacity: 1; }
+.card-esgotado .card-tams { display: none; }
+.opcao-esgotada { opacity: .45; text-decoration: line-through; cursor: not-allowed; border-style: dashed; }
+#jp-add:disabled { opacity: .45; cursor: not-allowed; transform: none; box-shadow: none; }
+.cupom-form { display: flex; gap: 8px; }
+.cupom-form input { flex: 1; min-width: 0; height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--linha); background: var(--creme); text-transform: uppercase; }
+.cupom-form .btn { min-height: 44px; padding: 0 1.1em; font-size: .9rem; }
+.cupom-msg { font-size: .82rem; margin-top: 6px; color: #3F7F58; min-height: 1em; }
+.cupom-msg[data-erro="true"] { color: #B4483F; }
+.total-desconto { color: #3F7F58; }
+.total-desconto b { font-size: 1.05rem; }
+.abrir-painel {
+  position: fixed; left: calc(16px + env(safe-area-inset-left, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40;
+  display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding: 0 16px 0 8px; border-radius: 999px; border: 1px solid var(--linha);
+  background: var(--papel); color: var(--tinta); font-family: var(--f-fofa); font-weight: 500; font-size: .92rem; cursor: pointer; box-shadow: var(--sombra);
+}
+.abrir-painel svg { width: 34px; height: 34px; overflow: visible; }
+.abrir-painel:hover { border-color: var(--ouro); }
+
+.area-loja { font-size: .85rem !important; opacity: .8; }
+/* botão do painel no topo: só aparece para a equipe */
+.icone.icone-painel { width: auto; height: 42px; padding: 0 14px 0 6px; gap: 6px; display: inline-flex; align-items: center; border: 1px solid var(--linha); border-radius: 999px; background: var(--papel); color: var(--tinta); font-family: var(--f-fofa); font-weight: 500; font-size: .88rem; }
+.icone.icone-painel:hover { border-color: var(--ouro); background: var(--papel); }
+.icone.icone-painel svg { width: 30px; height: 30px; overflow: visible; }
+.icone.icone-painel[hidden] { display: none; }
+@media (max-width: 560px) { .icone.icone-painel span { display: none; } .icone.icone-painel { padding: 0 6px; } }
+.janela-aviso { width: min(420px, calc(100% - 32px)); border-radius: 26px; padding: 28px 26px 26px; text-align: center; box-shadow: var(--sombra); }
+.janela-aviso[open] { display: grid; justify-items: center; gap: 12px; }
+.janela-aviso svg { width: 96px; height: auto; overflow: visible; }
+.janela-aviso h3 { font-size: 1.9rem; }
+.janela-aviso p { color: var(--tinta-suave); font-size: .95rem; }
+
+/* ---------- Telas menores ---------- */@media (max-width: 1180px) {
+  .topo-linha { grid-template-columns: auto 1fr auto; gap: 14px; }
+  .topo-linha nav { display: none; }
+  .busca { width: 100%; max-width: 380px; justify-self: end; }
+  .menu-movel { display: block; border-top: 1px solid var(--linha); overflow-x: auto; scrollbar-width: none; }
+  .menu-movel::-webkit-scrollbar { display: none; }
+  .menu-movel .menu { justify-content: flex-start; gap: 22px; padding-block: 6px; width: max-content; margin-inline: auto; }
+}
+@media (max-width: 960px) {
+  .grade { grid-template-columns: repeat(3, 1fr); }
+  .rodape-grid { grid-template-columns: 1fr 1fr; }
+  .rodape-grid > div:last-child { grid-column: span 2; }
+}
+@media (max-width: 780px) {
+  .util { display: none; }
+  .bento { grid-template-columns: 1fr 1fr; grid-template-rows: none; }
+  .b-grande { grid-column: span 2; grid-row: auto; min-height: 0; aspect-ratio: 4 / 4.4; }
+  .b-dinos { grid-column: span 2; }
+  .b-foto:not(.b-grande) { aspect-ratio: 3 / 4; }
+  .b-novo { grid-column: span 2; aspect-ratio: 4 / 3; }
+  .dicas-grid { grid-template-columns: 1fr; }
+  .fases { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .fase { padding: 8px 8px 16px; }
+  .fase h3 { font-size: 1.25rem; }
+  .fase-dino { width: 48px; right: -4px; bottom: -14px; }
+  .promessas ul { grid-template-columns: 1fr; justify-items: start; }
+  .promessas li { justify-content: flex-start; }
+  .grade { grid-template-columns: repeat(2, 1fr); gap: 18px 12px; }
+  .card-info { padding: 12px 12px 14px; }
+  .card-nome { font-size: .92rem; white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; min-height: 2.6em; }
+  .card-tams { display: none; }
+  .card:hover .selo { opacity: 1; }
+  .fav { width: 36px; height: 36px; top: 8px; right: 8px; }
+  .jp-grid { grid-template-columns: 1fr; }
+  .jp-foto img { max-height: 360px; }
+  .jp-info { padding: 22px 20px 24px; }
+  .dicas-arte svg { width: 190px; }
+}
+@media (max-width: 560px) {
+  .topo-linha { grid-template-columns: 1fr auto; row-gap: 8px; }
+  .logo-topo img { height: 48px; }
+  .busca { grid-column: 1 / -1; grid-row: 2; max-width: none; }
+  .rodape-grid { grid-template-columns: 1fr; }
+  .rodape-grid > div:last-child { grid-column: auto; }
+  .resultado { grid-template-columns: 1fr; }
+  .selo { font-size: .68rem; letter-spacing: .06em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Desenhos reutilizáveis: Dino, Dina, cabide, coração e o céu ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="coracao" viewBox="0 0 24 22"><path fill="currentColor" d="M12 21s-9-5.6-9-12A5 5 0 0 1 12 6a5 5 0 0 1 9 3c0 6.4-9 12-9 12z"/></symbol>
+
+    <!-- corpo comum: cabeça grande, focinho comprido, espinhos arredondados, rabinho -->
+    <g id="dino-base" stroke="var(--c-contorno)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+      <g fill="var(--c-espinho)">
+        <circle cx="101" cy="41" r="8"/><circle cx="89" cy="52" r="8"/><circle cx="83" cy="67" r="7.5"/>
+        <circle cx="79" cy="83" r="7"/><circle cx="74" cy="99" r="7"/><circle cx="68" cy="115" r="6.5"/>
+        <circle cx="61" cy="131" r="6"/><circle cx="50" cy="144" r="5.5"/><circle cx="37" cy="150" r="5"/><circle cx="25" cy="148" r="4"/>
+      </g>
+      <path fill="var(--c-corpo)" d="M92 58C96 40 120 32 136 40c10 6 14 16 16 22 12 0 24 4 26 16 2 14-10 24-28 26-10 2-18 4-22 10-2 12 2 24 6 36 4 16-2 30-18 32H74c-24 0-44-6-56-22-6-8-8-20-4-28 4 12 12 20 26 22 14 2 22-4 26-14 4-20 20-40 22-56 0-8 1-16 4-22z"/>
+      <path fill="var(--c-barriga)" stroke="none" d="M116 132c10 0 16 10 16 24 0 14-6 24-16 24s-14-10-14-24 4-24 14-24z"/>
+      <path fill="var(--c-corpo)" d="M74 182c-6-18 8-32 22-30 12 2 16 16 10 30z"/>
+      <path fill="var(--c-corpo)" d="M126 128c8 2 14 8 12 14-2 4-8 2-12-2z"/>
+      <path fill="none" d="M112 182c6 0 14-1 18-4"/>
+      <ellipse cx="120" cy="56" rx="18" ry="9" fill="#fff" stroke="none" opacity=".28"/>
+      <ellipse cx="142" cy="90" rx="9" ry="5.5" fill="var(--bochecha)" stroke="none" opacity=".7"/>
+      <circle cx="171" cy="73" r="1.6" fill="var(--c-contorno)" stroke="none"/>
+      <path fill="none" stroke="var(--olho)" stroke-width="2.6" d="M157 93q7 5 14-1"/>
+    </g>
+
+    <symbol id="dino" viewBox="0 0 200 200" style="--c-corpo:var(--dino-corpo);--c-contorno:var(--dino-contorno);--c-espinho:var(--dino-espinho);--c-barriga:var(--dino-barriga)">
+      <use href="#dino-base"/>
+      <ellipse cx="146" cy="73" rx="7" ry="8.5" fill="var(--olho)"/>
+      <circle cx="148.5" cy="69.5" r="2.8" fill="#fff"/>
+      <circle cx="144" cy="77" r="1.2" fill="#fff"/>
+    </symbol>
+
+    <symbol id="dina" viewBox="0 0 200 200" style="--c-corpo:var(--dina-corpo);--c-contorno:var(--dina-contorno);--c-espinho:var(--dina-espinho);--c-barriga:var(--dina-barriga)">
+      <use href="#dino-base"/>
+      <path d="M139 75q7-8 14 0" fill="none" stroke="var(--olho)" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M153 75l4-2M152 71l3-4" fill="none" stroke="var(--olho)" stroke-width="2" stroke-linecap="round"/>
+      <g fill="var(--laco)" stroke="var(--dina-contorno)" stroke-width="2.4" stroke-linejoin="round">
+        <path d="M113 36c-10-14-26-14-25-2 1 10 16 10 25 2z"/>
+        <path d="M113 36c6-16 22-20 25-8 2 10-14 14-25 8z"/>
+        <circle cx="113" cy="36" r="5"/>
+      </g>
+    </symbol>
+
+    <!-- Dino astronauta: o mesmo Dino com um capacete de bolha -->
+    <symbol id="dino-astro" viewBox="0 0 200 200">
+      <use href="#dino" width="200" height="200"/>
+      <circle cx="132" cy="76" r="58" fill="var(--capacete)" fill-opacity=".28" stroke="var(--capacete)" stroke-width="5"/>
+      <path d="M96 48a46 46 0 0 1 30-18" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".85"/>
+      <circle cx="90" cy="62" r="3.5" fill="#fff" opacity=".85"/>
+    </symbol>
+    <symbol id="dina-astro" viewBox="0 0 200 200">
+      <use href="#dina" width="200" height="200"/>
+      <circle cx="130" cy="70" r="62" fill="var(--capacete)" fill-opacity=".28" stroke="var(--capacete)" stroke-width="5"/>
+      <path d="M92 40a48 48 0 0 1 32-18" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".85"/>
+    </symbol>
+
+    <symbol id="saturno" viewBox="0 0 140 90">
+      <path d="M20 52c-14 8-16 16-4 18 18 4 64-6 96-22 18-9 24-18 14-21" fill="none" stroke="var(--anel)" stroke-width="6" stroke-linecap="round" opacity=".7"/>
+      <circle cx="70" cy="45" r="30" fill="var(--planeta)"/>
+      <path d="M44 34c16 4 36 4 52-2M41 50c18 5 40 4 58-3" fill="none" stroke="var(--planeta-faixa)" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="60" cy="33" r="7" fill="#fff" opacity=".35"/>
+      <path d="M38 58c-20 10-26 18-14 19 20 2 64-10 92-26" fill="none" stroke="var(--anel)" stroke-width="6" stroke-linecap="round"/>
+    </symbol>
+
+    <!-- Dino sentadinho em cima de Saturno -->
+    <symbol id="dino-saturno" viewBox="0 -14 140 134">
+      <use href="#saturno" x="0" y="30" width="140" height="90"/>
+      <use href="#dino" x="42" y="-12" width="62" height="62"/>
+    </symbol>
+
+    <!-- rabinho do Dino (a ponta aponta para a esquerda) -->
+    <symbol id="rabinho" viewBox="0 0 80 46">
+      <g fill="var(--dino-espinho)" stroke="var(--dino-contorno)" stroke-width="1.6">
+        <circle cx="18" cy="13.5" r="2.8"/><circle cx="29" cy="16" r="3.4"/><circle cx="41" cy="17.5" r="4"/><circle cx="54" cy="17.5" r="4.4"/><circle cx="66" cy="17" r="4.6"/>
+      </g>
+      <path d="M76 27c0 12-14 16-28 13C32 37 18 28 7 18c-3-3-1-6 3-5 12 3 26 6 40 6 16 0 26-3 26 8z" fill="var(--dino-corpo)" stroke="var(--dino-contorno)" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M70 34c-12 4-30 1-46-8" fill="none" stroke="var(--dino-barriga)" stroke-width="3.2" stroke-linecap="round"/>
+      <ellipse cx="58" cy="24" rx="8" ry="3" fill="#fff" opacity=".3"/>
+    </symbol>
+
+    <symbol id="cacto" viewBox="0 0 30 32">
+      <g fill="var(--dino-corpo)" stroke="var(--dino-contorno)" stroke-width="1.6" stroke-linejoin="round">
+        <path d="M10 18H7a3 3 0 0 1-3-3v-4a2 2 0 0 1 4 0v3h2"/><path d="M20 22h3a3 3 0 0 0 3-3v-5a2 2 0 0 0-4 0v4h-2"/>
+        <rect x="10" y="5" width="10" height="27" rx="5"/>
+      </g>
+      <circle cx="15" cy="5" r="3" fill="var(--laco)"/>
+    </symbol>
+    <symbol id="cacto-alto" viewBox="0 0 30 44">
+      <g fill="var(--dino-corpo)" stroke="var(--dino-contorno)" stroke-width="1.6" stroke-linejoin="round">
+        <path d="M10 22H7a3 3 0 0 1-3-3v-5a2 2 0 0 1 4 0v4h2"/><path d="M20 28h3a3 3 0 0 0 3-3v-6a2 2 0 0 0-4 0v5h-2"/>
+        <rect x="10" y="6" width="10" height="38" rx="5"/>
+      </g>
+      <circle cx="15" cy="6" r="3" fill="var(--laco)"/>
+    </symbol>
+
+    <symbol id="lua" viewBox="0 0 80 80">
+      <path d="M52 8a34 34 0 1 0 20 50A28 28 0 0 1 52 8z" fill="var(--lua)"/>
+      <circle cx="30" cy="30" r="5" fill="var(--lua-cratera)"/><circle cx="22" cy="52" r="3.5" fill="var(--lua-cratera)"/><circle cx="42" cy="62" r="4" fill="var(--lua-cratera)"/>
+      <path d="M34 44q4 4 8 0M22 40q3-3 6 0" fill="none" stroke="#B89A66" stroke-width="2" stroke-linecap="round"/>
+      <ellipse cx="26" cy="47" rx="4" ry="2.5" fill="var(--bochecha)" opacity=".6"/>
+    </symbol>
+
+    <symbol id="planeta" viewBox="0 0 60 60">
+      <circle cx="30" cy="30" r="22" fill="var(--dino-barriga)"/>
+      <circle cx="22" cy="24" r="5" fill="var(--dino-corpo)"/><circle cx="36" cy="38" r="3.5" fill="var(--dino-corpo)"/><circle cx="38" cy="22" r="2.5" fill="var(--dino-corpo)"/>
+    </symbol>
+
+    <symbol id="estrela" viewBox="0 0 40 40">
+      <path d="M20 3l4.8 10.4 11.2 1.3-8.3 7.6 2.3 11.1L20 27.8l-10 5.6 2.3-11.1L4 14.7l11.2-1.3z" fill="var(--estrela)" stroke="var(--estrela)" stroke-width="3" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="brilho" viewBox="0 0 40 40">
+      <path d="M20 2c1.6 10 8 16.4 18 18-10 1.6-16.4 8-18 18-1.6-10-8-16.4-18-18 10-1.6 16.4-8 18-18z" fill="var(--brilho)"/>
+    </symbol>
+
+    <symbol id="cabide" viewBox="0 0 300 110">
+      <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        d="M150 56V44c0-8 14-12 14-24 0-9-7-16-16-16s-15 6-15 13M150 56C118 63 62 72 22 92c-8 4-9 10-6 16M150 56c32 7 88 16 128 36 8 4 9 10 6 16"/>
+      <use href="#coracao" x="141" y="47" width="18" height="17" style="color:var(--blush)"/>
+    </symbol>
+
+    <symbol id="i-coracao" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.2 4.2 0 0 1 12 7.3a4.2 4.2 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sacola" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></g></symbol>
+    <symbol id="i-lupa" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20 20"/></g></symbol>
+    <symbol id="i-seta" viewBox="0 0 16 16"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<div class="ceu" id="ceu" aria-hidden="true"></div>
+
+<div class="util">
+  <div class="cont">
+    <a href="#dicas">Guia de tamanhos</a>
+    <a href="#contato">Fale conosco</a>
+    <a id="util-zap" href="#" target="_blank" rel="noopener">Peça pelo WhatsApp</a>
+  </div>
+</div>
+
+<header class="topo">
+  <div class="cont topo-linha">
+    <a class="logo-topo" href="#inicio" aria-label="Cabidino, início"><img src="logo-cabidino-transparente.png" alt="Cabidino Loja Infantil"></a>
+    <nav aria-label="Principal"><ul class="menu" data-menu></ul></nav>
+    <form class="busca" id="busca" role="search">
+      <label class="so-leitor" for="busca-campo">Buscar produtos</label>
+      <input id="busca-campo" type="search" placeholder="O que você está procurando?" autocomplete="off">
+      <button type="submit" aria-label="Buscar"><svg aria-hidden="true"><use href="#i-lupa"/></svg></button>
+    </form>
+    <div class="icones">
+      <button class="icone icone-painel" id="topo-painel" type="button" hidden aria-label="Abrir o Painel Cabidino"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#dino"/></svg><span>Painel</span></button>
+      <button class="icone" id="ver-favoritos" type="button" aria-label="Ver favoritos">
+        <svg aria-hidden="true" fill="none"><use href="#i-coracao"/></svg><span class="contador" id="cont-fav" data-zero="true">0</span>
+      </button>
+      <button class="icone" id="abrir-sacola" type="button" aria-label="Abrir sacola">
+        <svg aria-hidden="true"><use href="#i-sacola"/></svg><span class="contador" id="contador" data-zero="true">0</span>
+      </button>
+    </div>
+  </div>
+  <div class="menu-movel"><div class="cont"><ul class="menu" data-menu></ul></div></div>
+</header>
+
+<div class="recados" role="region" aria-label="Avisos da loja">
+  <div class="cont">
+    <button type="button" id="recado-ant" aria-label="Aviso anterior"><svg aria-hidden="true"><use href="#i-seta"/></svg></button>
+    <p class="recado" id="recado" aria-live="polite"></p>
+    <button type="button" id="recado-prox" aria-label="Próximo aviso"><svg aria-hidden="true" style="transform:scaleX(-1)"><use href="#i-seta"/></svg></button>
+  </div>
+</div>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="cont hero-centro">
+      <h1 class="so-leitor">Cabidino Loja Infantil</h1>
+      <img class="logo-hero" src="logo-cabidino-transparente.png" alt="Cabidino Loja Infantil" width="1072" height="522">
+      <p class="hero-frase" data-texto="hero-frase">Um mundinho onde a <em>fofura</em> encontra o <em>estilo</em> e cada pequeno deixa sua própria pegada na história.</p>
+      <p class="hero-sub" data-texto="hero-sub">Roupas macias e cores suaves, do tamanho 1 ao 14.</p>
+      <div class="acoes">
+        <a class="btn" href="#vitrine">Ver a coleção</a>
+        <a class="btn btn-linha" href="#dicas">Achar o tamanho</a>
+      </div>
+    </div>
+
+    <div class="cont">
+      <div class="bento">
+        <button class="b b-foto b-grande" type="button" data-foto="arco-iris-mily-91012">
+          <img src="fotos-hd/conjunto-arco-iris-mily-91012.jpg" alt="Menina sorrindo com o conjunto Arco Íris Mily, blusa branca com arco-íris e saia estampada">
+          <span class="b-tag"><b>Arco Íris Mily</b><span data-preco="arco-iris-mily-91012"></span></span>
+        </button>
+        <div class="b b-dinos">
+          <div class="balao" id="balao" aria-live="polite">Oi! Eu sou o Dino.</div>
+          <svg class="cabide-mini" viewBox="0 0 300 110" aria-hidden="true"><use href="#cabide"/></svg>
+          <div class="par">
+            <svg class="coracao-meio" viewBox="0 0 24 22" aria-hidden="true"><use href="#coracao"/></svg>
+            <button type="button" class="falar" aria-label="Clique no Dino para ele falar"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#dino"/></svg></button>
+            <button type="button" class="falar" aria-label="Clique na Dina para ela falar"><svg viewBox="0 0 200 200" aria-hidden="true" style="transform:scaleX(-1)"><use href="#dina"/></svg></button>
+          </div>
+        </div>
+        <button class="b b-foto" type="button" data-foto="care-renda-91106">
+          <img src="fotos-hd/conjunto-mily-care-renda-91106.jpg" alt="Menina com o conjunto Mily Care Renda off white">
+          <span class="b-tag"><b>Mily Care Renda</b><span data-preco="care-renda-91106"></span></span>
+        </button>
+        <button class="b b-foto b-novo" type="button" data-foto="passarinhos-90971">
+          <img src="fotos-hd/conjunto-mily-passarinhos-90971.jpg" alt="Menina com o conjunto Mily Passarinhos, blusa branca estampada e shorts azul">
+          <span class="b-selo">Novidade</span>
+          <span class="b-tag"><b>Mily Passarinhos</b><span data-preco="passarinhos-90971"></span></span>
+        </button>
+        <button class="b b-foto" type="button" data-foto="ocean-91109">
+          <img src="fotos-hd/conjunto-mily-ocean-91109.jpg" alt="Menina com o conjunto Mily Ocean, blusa rosa com narval e shorts azul">
+          <span class="b-tag"><b>Mily Ocean</b><span data-preco="ocean-91109"></span></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="promessas" aria-label="Por que comprar na Cabidino">
+    <ul class="cont">
+      <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M16 9V7c0-2 3-3 3-5.5"/><path d="M16 9C11 10 6 12 3 15c-1 1-1 3 1 3h24c2 0 2-2 1-3-3-3-8-5-13-6z"/><path d="M8 18v9h16v-9"/></svg><span data-texto="promessa-1">Peças escolhidas uma a uma</span></li>
+      <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h15v13H3z"/><path d="M18 13h6l4 5v4h-10"/><circle cx="8" cy="24" r="2.5"/><circle cx="23" cy="24" r="2.5"/></svg><span id="promessa-frete">Frete grátis acima de R$ 299</span></li>
+      <li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M16 27s-11-6.8-11-14.5A6 6 0 0 1 16 9a6 6 0 0 1 11 3.5C27 20.2 16 27 16 27z"/></svg><span data-texto="promessa-3">Atendimento pelo WhatsApp</span></li>
+    </ul>
+  </section>
+
+  <section class="secao" id="fases">
+    <div class="cont">
+      <div class="secao-topo">
+        <p class="kicker" data-texto="fases-kicker">Para cada fase</p>
+        <h2 data-texto="fases-titulo">Pequenos dinos, <em>grandes aventuras</em></h2>
+        <p data-texto="fases-texto">O Dino cresce junto. Escolha a idade e veja só as peças que servem, do primeiro passinho até os 14 anos.</p>
+      </div>
+      <div class="fases" id="lista-fases"></div>
+    </div>
+  </section>
+
+  <section class="secao" id="vitrine" style="padding-top:0">
+    <div class="cont">
+      <div class="secao-topo">
+        <p class="kicker" data-texto="vitrine-kicker">Coleção Verão 2026</p>
+        <h2 data-texto="vitrine-titulo">Novidades na arara</h2>
+      </div>
+      <div class="barra-filtros">
+        <div class="chips" id="chips" role="group" aria-label="Filtrar peças"></div>
+        <label class="ordem" for="ordem">Ordenar
+          <select id="ordem">
+            <option value="destaque">Destaques</option>
+            <option value="menor">Menor preço</option>
+            <option value="maior">Maior preço</option>
+            <option value="nome">Nome (A a Z)</option>
+          </select>
+        </label>
+      </div>
+      <div class="resultado-busca" id="resultado-busca" hidden></div>
+      <div class="grade" id="grade"></div>
+      <div class="mais">
+        <span id="mostrando"></span>
+        <button class="btn btn-linha" id="ver-mais" type="button">Ver mais peças</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao dicas" id="dicas">
+    <div class="cont dicas-grid">
+      <div class="dicas-arte">
+        <div class="balao" id="balao-dica" aria-live="polite"></div>
+        <svg id="dina-cresce" viewBox="0 0 200 200" aria-hidden="true"><use href="#dina"/></svg>
+      </div>
+      <div class="dicas-texto">
+        <p class="kicker" data-texto="dicas-kicker">Dicas do Dino</p>
+        <h2 data-texto="dicas-titulo">Qual tamanho escolher?</h2>
+        <p data-texto="dicas-texto">Conte a idade da criança e a Dina, a amiga do Dino, sugere o tamanho e a coleção certa.</p>
+        <div class="idade-caixa">
+          <label for="idade">Idade da criança <span class="idade-num"><span id="idade-valor">5</span> <small style="font-size:1rem">anos</small></span></label>
+          <input type="range" id="idade" min="1" max="14" step="1" value="5">
+          <div class="regua" aria-hidden="true"><span>1</span><span>4</span><span>7</span><span>10</span><span>14</span></div>
+          <div class="resultado">
+            <div><small>Tamanho sugerido</small><b id="res-tam">6</b></div>
+            <div><small>Coleção</small><b id="res-faixa">4 a 10 anos</b></div>
+          </div>
+          <button class="btn" id="ver-idade" type="button">Ver peças para essa idade</button>
+          <p class="nota" data-texto="dicas-nota">É uma sugestão pela idade. Se a criança estiver entre dois tamanhos, escolha o maior.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape" id="contato">
+  <div class="rodape-topo"><div class="cont rodape-grid">
+    <div>
+      <img class="rodape-logo" src="logo-cabidino-transparente.png" alt="Cabidino Loja Infantil">
+      <p data-texto="rodape-descricao">Roupas delicadas para crianças de 1 a 14 anos.</p>
+      <a href="#vitrine">Coleção Verão 2026</a>
+      <a href="#dicas">Guia de tamanhos</a>
+      <a href="#painel" class="area-loja" id="area-loja">🔒 Área da loja</a>
+    </div>
+    <div>
+      <h4>Fale conosco</h4>
+      <div class="zap-linha">
+        <a class="contato contato-zap" id="ct-zap" href="#" target="_blank" rel="noopener">
+          <svg class="zap-icone" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L3 21l4.4-1.1A9.2 9.2 0 1 0 12 2.8z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+            <path d="M16.4 14.2c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.8 6.8 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.7-1.7c-.2-.4-.4-.4-.5-.4h-.5a.9.9 0 0 0-.6.3 2.7 2.7 0 0 0-.8 2 4.7 4.7 0 0 0 1 2.4 10.7 10.7 0 0 0 4.1 3.6c1.5.6 2.1.7 2.9.6a2.4 2.4 0 0 0 1.6-1.1 2 2 0 0 0 .1-1.1c-.1-.1-.2-.2-.5-.3z" fill="currentColor"/>
+          </svg>
+          <span id="ct-zap-txt"></span>
+        </a>
+        <span class="rabinho" aria-hidden="true"><svg viewBox="0 0 80 46"><use href="#rabinho"/></svg><span>clique aqui!</span></span>
+      </div>
+      <a class="contato" id="ct-insta" href="#" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.8" cy="7.2" r=".9" fill="currentColor" stroke="none"/></svg></span><span id="ct-insta-txt"></span></a>
+      <div class="contato"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="3.5" y="6" width="17" height="12" rx="2"/><path d="M4 7l8 6 8-6"/></svg></span><span id="ct-email"></span></div>
+      <div class="contato"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M6 8h12l-1 12H7z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></span><span id="ct-site"></span></div>
+    </div>
+    <div class="casal">
+      <svg class="cabide-mini" viewBox="0 0 300 110" aria-hidden="true"><use href="#cabide"/></svg>
+      <div class="par">
+        <svg class="coracao-meio" viewBox="0 0 24 22" aria-hidden="true"><use href="#coracao"/></svg>
+        <button type="button" class="falar" aria-label="Dino"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#dino"/></svg></button>
+        <button type="button" class="falar" aria-label="Dina"><svg viewBox="0 0 200 200" aria-hidden="true" style="transform:scaleX(-1)"><use href="#dina"/></svg></button>
+      </div>
+      <span class="feito" data-texto="rodape-feito">♥ FEITO COM AMOR ♥</span>
+      <p class="lema" data-texto="rodape-lema">Pequenos dinos, grandes aventuras.</p>
+    </div>
+  </div></div>
+  <div class="barra-dino" id="barra-dino">
+    <div class="cont">
+      <div class="jogo-area" tabindex="0" aria-label="Brincadeira: clique ou aperte espaço para o Dino pular os cactinhos">
+        <span class="barra-placar"><b data-pontos>0</b> pts <span data-recorde></span></span>
+        <span class="barra-dica" data-dica data-texto="jogo-convite">Clique aqui para o Dino pular os cactinhos!</span>
+        <div class="jogo-dina">
+          <span class="jogo-fala" data-fala aria-live="polite">Pula, Dino!</span>
+          <svg viewBox="0 0 200 200" aria-hidden="true" style="transform:scaleX(-1)"><use href="#dina"/></svg>
+        </div>
+        <div class="jogo-chao"></div>
+        <div class="jogo-dino" data-dino><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#dino"/></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="rodape-base"><div class="cont legal">
+    <span id="legal-texto"></span>
+    <span data-texto="rodape-beijo">Dino e Dina mandam um beijo.</span>
+  </div></div>
+</footer>
+
+<!-- Janela do produto -->
+<dialog class="janela-produto" id="janela-produto" aria-labelledby="jp-nome">
+  <button class="fechar" type="button" data-fechar aria-label="Fechar"><svg viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 3l10 10M13 3L3 13"/></svg></button>
+  <div class="jp-grid">
+    <div class="jp-foto"><img id="jp-foto" src="" alt=""></div>
+    <div class="jp-info">
+      <p class="kicker" id="jp-faixa"></p>
+      <h3 id="jp-nome"></h3>
+      <span class="preco" id="jp-preco"></span>
+      <span class="jp-parcela" id="jp-parcela" hidden></span>
+      <p class="jp-desc" id="jp-desc"></p>
+      <div class="grupo"><span class="grupo-rotulo">Cor</span><div class="opcoes" id="jp-cores"></div></div>
+      <div class="grupo"><span class="grupo-rotulo">Tamanho</span><div class="opcoes" id="jp-tams"></div></div>
+      <div class="dica-mini"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#dino"/></svg><span id="jp-dica"></span></div>
+      <div class="jp-acoes">
+        <div class="qtd"><button type="button" id="jp-menos" aria-label="Diminuir quantidade">−</button><span id="jp-qtd">1</span><button type="button" id="jp-mais" aria-label="Aumentar quantidade">+</button></div>
+        <button class="btn" type="button" id="jp-add">Colocar na sacola</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<!-- Sacola -->
+<dialog class="janela-sacola" id="janela-sacola" aria-labelledby="sacola-titulo">
+  <div class="sacola-corpo">
+    <div class="sacola-topo">
+      <h3 id="sacola-titulo">Sua sacola</h3>
+      <button class="fechar" type="button" data-fechar aria-label="Fechar sacola"><svg viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 3l10 10M13 3L3 13"/></svg></button>
+    </div>
+    <div class="frete">
+      <span id="frete-texto"></span>
+      <div class="trilha">
+        <div class="trilha-cheia" id="trilha-cheia"></div>
+        <div class="trilha-dino" id="trilha-dino"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#dino"/></svg></div>
+        <svg class="trilha-meta" viewBox="0 0 24 22" aria-hidden="true"><use href="#coracao"/></svg>
+      </div>
+    </div>
+    <div class="itens" id="itens"></div>
+    <div class="sacola-rodape">
+      <div id="cupom-area" hidden>
+        <form class="cupom-form" id="cupom-form">
+          <label class="so-leitor" for="cupom-campo">Cupom de desconto</label>
+          <input id="cupom-campo" type="text" placeholder="Tem um cupom?" autocomplete="off" maxlength="30">
+          <button class="btn btn-linha" type="submit">Aplicar</button>
+        </form>
+        <p class="cupom-msg" id="cupom-msg" aria-live="polite"></p>
+      </div>
+      <div class="total"><span>Subtotal</span><b id="subtotal">R$ 0,00</b></div>
+      <div class="total total-desconto" id="linha-desconto" hidden><span>Cupom <span id="nome-cupom"></span></span><b id="valor-desconto"></b></div>
+      <div class="total" id="linha-total" hidden><span>Total</span><b id="valor-total"></b></div>
+      <a class="btn" id="finalizar" href="#" target="_blank" rel="noopener">Finalizar pelo WhatsApp</a>
+      <p class="aviso-zap" id="aviso-zap" hidden>O número de WhatsApp da loja ainda não foi configurado no painel.</p>
+    </div>
+  </div>
+</dialog>
+
+<!-- Aviso para quem tenta entrar na área da loja sem ser da equipe -->
+<dialog class="janela-aviso" id="area-restrita" aria-labelledby="area-restrita-titulo">
+  <svg viewBox="0 0 200 200" aria-hidden="true"><use href="#dino-astro"/></svg>
+  <h3 id="area-restrita-titulo">Área da equipe</h3>
+  <p>Esta área é só para a equipe da Cabidino. Para entrar, abra o site com a conta da loja no Claude.</p>
+  <button class="btn" type="button" data-fechar>Voltar para a loja</button>
+</dialog>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="nuvem.js"></script>
+<!-- Dados da loja: o painel edita e publica este bloco. Não edite à mão. -->
+<script type="application/json" id="dados-loja">{"versao":1,"loja":{"whatsapp":"5563992247476","instagram":"cabidino.loja","email":"cabidino.loja@gmail.com","site":"www.cabidino.com.br","freteGratisAcima":299,"parcelasSemJuros":0,"razaoSocial":"Razão social a definir","cnpj":"CNPJ a definir","cidade":"Cidade a definir","linkLoja":"https://claude.ai/artifact/DADAv5ZVAKMagwtCPx8H3F"},"recados":["Frete grátis acima de R$ 299","Coleção Verão 2026 chegou: 56 peças novas","Faça seu pedido pelo WhatsApp (63) 99224-7476"],"falas":["Oi! Eu sou o Dino.","Já viu a coleção de verão?","Me conta a idade e eu acho o tamanho!","Frete grátis acima de R$ 299."],"textos":{},"produtos":[{"id":"conjunto-mily-soft-91108","nome":"Mily Soft","tipo":"Conjunto","idade":"1-3a","preco":92.8,"cores":["pink","amarelo e azul"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-mily-soft-91108.jpg","descricao":"Conjunto infantil com blusa em meia malha macia e shorts em moletinho leve. Toque suave e confortável, ideal para os dias mais fresquinhos!","ativo":true,"estoque":{"1|pink":5,"1|amarelo e azul":5,"2|pink":5,"2|amarelo e azul":5,"3|pink":5,"3|amarelo e azul":5}},{"id":"conjunto-mily-tule-90749","nome":"Mily Tule","tipo":"Conjunto","idade":"1-3a","preco":88,"cores":["preto","rosa"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-mily-tule-90749.jpg","descricao":"Conjunto infantil com blusa em meia malha e aplique bordado e saia em tule. Leve, confortável e cheio de charme para os dias especiais!","ativo":true,"estoque":{"1|preto":5,"1|rosa":5,"2|preto":5,"2|rosa":5,"3|preto":5,"3|rosa":5}},{"id":"conjunto-mily-cute-90960","nome":"Mily Cute","tipo":"Conjunto","idade":"1-3a","preco":105.6,"cores":["verde água","rosa"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-mily-cute-90960.jpg","descricao":"Conjunto infantil com blusa estampada e babados na manga e shorts com babados laterais. Leve, confortável e cheio de charme para os dias especiais!","ativo":true,"estoque":{"1|verde água":5,"1|rosa":5,"2|verde água":5,"2|rosa":5,"3|verde água":5,"3|rosa":5}},{"id":"conjunto-mily-raposa-91107","nome":"Mily Raposa","tipo":"Conjunto","idade":"1-3a","preco":99.2,"cores":["pink","turquesa"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-mily-raposa-91107.jpg","descricao":"Conjunto infantil com blusa estampada e babados nas mangas e saia com detalhe de listras. Leve, confortável e cheio de charme para os dias especiais!","ativo":true,"estoque":{"1|pink":5,"1|turquesa":5,"2|pink":5,"2|turquesa":5,"3|pink":5,"3|turquesa":5}},{"id":"conjunto-mily-cactus-91218","nome":"Mily Cactus","tipo":"Conjunto","idade":"1-3a","preco":67.2,"cores":["verde","rosa"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-mily-cactus-91218.jpg","descricao":"Conjunto infantil com blusa estampada e calça com estampa exclusiva de cactos. Leve, confortável e cheio de charme para os dias especiais!","ativo":true,"estoque":{"1|verde":5,"1|rosa":5,"2|verde":5,"2|rosa":5,"3|verde":5,"3|rosa":5}},{"id":"conjunto-mily-conchas-91214","nome":"Mily Conchas","tipo":"Conjunto","idade":"1-3a","preco":105.6,"cores":["rosa","laranja"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-mily-conchas-91214.jpg","descricao":"Conjunto infantil com blusa estampada com babado na gola e laço decorativo e shorts com detalhe de laço nas laterais. Leve, confortável e cheio de charme para os dias especiais!","ativo":true,"estoque":{"1|rosa":5,"1|laranja":5,"2|rosa":5,"2|laranja":5,"3|rosa":5,"3|laranja":5}},{"id":"conjunto-mily-lhama-91211","nome":"Mily Lhama","tipo":"Conjunto","idade":"1-3a","preco":99.2,"cores":["branco","rosa"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-mily-lhama-91211.jpg","descricao":"Conjunto infantil com blusa estampada com detalhe de amarração e short com estampa exclusiva de lhamas e folhagens tropicais. Leve, confortável e cheio de charme para os dias especiais!","ativo":true,"estoque":{"1|branco":5,"1|rosa":5,"2|branco":5,"2|rosa":5,"3|branco":5,"3|rosa":5}},{"id":"conjunto-mily-jardineira-91209","nome":"Mily Jardineira","tipo":"Conjunto","idade":"1-3a","preco":126.4,"cores":["rosa","pink"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-mily-jardineira-91209.jpg","descricao":"Conjunto infantil com jardineira estampada e blusa lisa em cotton. Estampa divertida com arco-íris, nuvens e corações que encantam!","ativo":true,"estoque":{"1|rosa":5,"1|pink":5,"2|rosa":5,"2|pink":5,"3|rosa":5,"3|pink":5}},{"id":"conjunto-mily-ocean-91109","nome":"Mily Ocean","tipo":"Conjunto","idade":"1-3a","preco":99.2,"cores":["rosa","branco"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-mily-ocean-91109.jpg","descricao":"Conjunto infantil com blusa em cotton e babados nas mangas. Estampa de oceano com narval, estrelinhas e gotinhas. Shorts estampado com elástico no cós para mais conforto.","ativo":true,"estoque":{"1|rosa":5,"1|branco":5,"2|rosa":5,"2|branco":5,"3|rosa":5,"3|branco":5}},{"id":"conjunto-mily-fashion-90968","nome":"Mily Fashion","tipo":"Conjunto","idade":"1-3a","preco":104,"cores":["rosa","branco"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-mily-fashion-90968.jpg","descricao":"Conjunto infantil com blusa em cotton e babados nas mangas. Estampa fofa de cachorrinho e bicicleta. Shorts estampado com elástico no cós e bolsos frontais.","ativo":true,"estoque":{"1|rosa":5,"1|branco":5,"2|rosa":5,"2|branco":5,"3|rosa":5,"3|branco":5}},{"id":"conjunto-mily-floral-90962","nome":"Mily Floral","tipo":"Conjunto","idade":"1-3a","preco":99.2,"cores":["marinho","rosa"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-mily-floral-90962.jpg","descricao":"Conjunto infantil com blusa em cotton e babados nas mangas. Estampa exclusiva de cachorrinho e flores. Shorts estampado com elástico no cós e laço decorativo.","ativo":true,"estoque":{"1|marinho":5,"1|rosa":5,"2|marinho":5,"2|rosa":5,"3|marinho":5,"3|rosa":5}},{"id":"conjunto-mily-candy-90746","nome":"Mily Candy","tipo":"Conjunto","idade":"1-3a","preco":88,"cores":["marinho","vermelho"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-mily-candy-90746.jpg","descricao":"Conjunto infantil com blusa em cotton estampado. Detalhe de laços nos ombros e babado na barra. Shorts em cotton com elástico na cintura e babado na barra.","ativo":true,"estoque":{"1|marinho":5,"1|vermelho":5,"2|marinho":5,"2|vermelho":5,"3|marinho":5,"3|vermelho":5}},{"id":"conjunto-mily-coala-90962-b","nome":"Mily Coala","tipo":"Conjunto","idade":"1-3a","preco":99.2,"cores":["marinho","rosa"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-mily-coala-90962-b.jpg","descricao":"Conjunto infantil com blusa em cotton estampado. Mangas com babados em poá e estampa exclusiva de coala com detalhes delicados. Shorts em cotton com elástico na cintura e laço decorativo.","ativo":true,"estoque":{"1|marinho":5,"1|rosa":5,"2|marinho":5,"2|rosa":5,"3|marinho":5,"3|rosa":5}},{"id":"conjunto-mily-passarinhos-90971","nome":"Mily Passarinhos","tipo":"Conjunto","idade":"1-3a","preco":99.2,"cores":["azul","branco"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-mily-passarinhos-90971.jpg","descricao":"Conjunto infantil com blusa em cotton estampado. Mangas com babados em pompons coloridos e estampa exclusiva de passarinhos e flores. Shorts em cotton com elástico na cintura e bolso funcional.","ativo":true,"estoque":{"1|azul":5,"1|branco":5,"2|azul":5,"2|branco":5,"3|azul":5,"3|branco":5}},{"id":"conjunto-mily-siciliano-90969","nome":"Mily Siciliano","tipo":"Conjunto","idade":"1-3a","preco":108.8,"cores":["amarelo","pêssego"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-mily-siciliano-90969.jpg","descricao":"Conjunto infantil com blusa em cotton estampado. Mangas com babados e alças que deixam o look delicado e confortável. Shorts em cotton com elástico na cintura e laços decorativos.","ativo":true,"estoque":{"1|amarelo":5,"1|pêssego":5,"2|amarelo":5,"2|pêssego":5,"3|amarelo":5,"3|pêssego":5}},{"id":"conjunto-mily-soft-90958","nome":"Mily Soft","tipo":"Conjunto","idade":"1-3a","preco":105.6,"cores":["verde","bege"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-mily-soft-90958.jpg","descricao":"Conjunto infantil com blusa em cotton estampado. Modelagem soltinha que proporciona conforto e liberdade de movimentos. Shorts em cotton com elástico na cintura e detalhe de babados.","ativo":true,"estoque":{"1|verde":5,"1|bege":5,"2|verde":5,"2|bege":5,"3|verde":5,"3|bege":5}},{"id":"conjunto-mily-unicornio-90976","nome":"Mily Unicórnio","tipo":"Conjunto","idade":"1-3a","preco":99.2,"cores":["pink","azul"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-mily-unicornio-90976.jpg","descricao":"Conjunto infantil com blusa em cotton estampado. Mangas com babados que deixam o look ainda mais charmoso. Shorts em cotton com elástico na cintura e estampa divertida.","ativo":true,"estoque":{"1|pink":5,"1|azul":5,"2|pink":5,"2|azul":5,"3|pink":5,"3|azul":5}},{"id":"conjunto-mily-summer-91194","nome":"Mily Summer","tipo":"Conjunto","idade":"1-3a","preco":94.4,"cores":["azul","pink"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-mily-summer-91194.jpg","descricao":"Conjunto infantil com blusa em cotton estampado. Babado duplo que traz leveza e um toque delicado. Shorts em cotton com elástico na cintura para mais conforto.","ativo":true,"estoque":{"1|azul":5,"1|pink":5,"2|azul":5,"2|pink":5,"3|azul":5,"3|pink":5}},{"id":"conjunto-summer-floral-91223","nome":"Summer Floral","tipo":"Conjunto","idade":"1-3a","preco":83.2,"cores":["laranja","pink"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-summer-floral-91223.jpg","descricao":"Conjunto infantil com blusa em cotton estampado. Estampa frontal com flores, arco-íris e detalhes coloridos que trazem alegria. Bermuda em cotton com elástico na cintura para mais conforto.","ativo":true,"estoque":{"1|laranja":5,"1|pink":5,"2|laranja":5,"2|pink":5,"3|laranja":5,"3|pink":5}},{"id":"conjunto-melancia-mily-91186","nome":"Melância Mily","tipo":"Conjunto","idade":"1-3a","preco":92.8,"cores":["branco","coral"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-melancia-mily-91186.jpg","descricao":"Conjunto infantil com blusa em cotton estampado. Estampa divertida de melancia com óculos, cheia de charme e delicadeza. Shorts em cotton com elástico na cintura e estampa de frutas.","ativo":true,"estoque":{"1|branco":5,"1|coral":5,"2|branco":5,"2|coral":5,"3|branco":5,"3|coral":5}},{"id":"conjunto-mily-space-91216","nome":"Mily Space","tipo":"Conjunto","idade":"1-3a","preco":83.2,"cores":["branco","laranja"],"tamanhos":[1,2,3],"foto":"fotos/conjunto-mily-space-91216.jpg","descricao":"Conjunto infantil com blusa em cotton estampado. Estampa divertida de espaço com foguetes, planetas e estrelas que estimulam a imaginação. Calça em cotton com elástico na cintura para mais conforto.","ativo":true,"estoque":{"1|branco":5,"1|laranja":5,"2|branco":5,"2|laranja":5,"3|branco":5,"3|laranja":5}},{"id":"conjunto-mily-infantil-urso-91010","nome":"Mily Infantil Urso","tipo":"Conjunto","idade":"4-10a","preco":115.2,"cores":["branco e rosa","rosa e cinza"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-mily-infantil-urso-91010.jpg","descricao":"Conjunto infantil com blusa em cotton com estampa de ursinhos. Detalhe de ombro vazado que traz charme e modernidade. Shorts em moletinho com babados xadrez nas laterais e laço decorativo.","ativo":true,"estoque":{"4|branco e rosa":5,"4|rosa e cinza":5,"6|branco e rosa":5,"6|rosa e cinza":5,"8|branco e rosa":5,"8|rosa e cinza":5,"10|branco e rosa":5,"10|rosa e cinza":5}},{"id":"conjunto-mily-style-91013","nome":"Mily Style","tipo":"Conjunto","idade":"4-10a","preco":126.4,"cores":["branco e laranja","branco e rosa"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-mily-style-91013.jpg","descricao":"Conjunto infantil com blusa em cotton com estampa floral. Blusa com capuz, zíper frontal e detalhe de cadarço. Shorts com viés contrastante e laços decorativos nas laterais para um toque de charme.","ativo":true,"estoque":{"4|branco e laranja":5,"4|branco e rosa":5,"6|branco e laranja":5,"6|branco e rosa":5,"8|branco e laranja":5,"8|branco e rosa":5,"10|branco e laranja":5,"10|branco e rosa":5}},{"id":"conjunto-mily-soft-91203","nome":"Mily Soft","tipo":"Conjunto","idade":"4-10a","preco":142.4,"cores":["arco-íris e rosa","lilás e lavanda"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-mily-soft-91203.jpg","descricao":"Conjunto infantil em cotton com toque macio e confortável. Blusa com estampa frontal em strass de ursinho e listras em tons pastel. Shorts com faixa lateral em contraste que traz estilo esportivo.","ativo":true,"estoque":{"4|arco-íris e rosa":5,"4|lilás e lavanda":5,"6|arco-íris e rosa":5,"6|lilás e lavanda":5,"8|arco-íris e rosa":5,"8|lilás e lavanda":5,"10|arco-íris e rosa":5,"10|lilás e lavanda":5}},{"id":"macacao-jardineira-mily-91208","nome":"Jardineira Mily","tipo":"Macacão","idade":"4-10a","preco":142.4,"cores":["laranja e branco","rosa e branco"],"tamanhos":[4,6,8,10],"foto":"fotos/macacao-jardineira-mily-91208.jpg","descricao":"Jardineira infantil em cotton com estampa exclusiva e alegre. Alças com botões que facilitam na hora de vestir. Elástico na cintura para mais conforto e liberdade de movimentos.","ativo":true,"estoque":{"4|laranja e branco":5,"4|rosa e branco":5,"6|laranja e branco":5,"6|rosa e branco":5,"8|laranja e branco":5,"8|rosa e branco":5,"10|laranja e branco":5,"10|rosa e branco":5}},{"id":"conjunto-mily-birds-90992","nome":"Mily Birds","tipo":"Conjunto","idade":"4-10a","preco":136,"cores":["branco","preto"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-mily-birds-90992.jpg","descricao":"Conjunto infantil em cotton com estampa exclusiva de pássaros e folhagens coloridas. Blusa ombro a ombro com alcinha fina e babado delicado. Shorts com bordado \"Mily\", cós com elástico e faixinha para amarração.","ativo":true,"estoque":{"4|branco":5,"4|preto":5,"6|branco":5,"6|preto":5,"8|branco":5,"8|preto":5,"10|branco":5,"10|preto":5}},{"id":"conjunto-mily-space-91217","nome":"Mily Space","tipo":"Conjunto","idade":"4-10a","preco":108.8,"cores":["preto","laranja"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-mily-space-91217.jpg","descricao":"Conjunto infantil em cotton com estampa divertida de espaço. Blusa com manga japonesa e detalhe em renda. Saia-short com estampa exclusiva, cós elástico com faixa arco-íris que traz mais charme e conforto.","ativo":true,"estoque":{"4|preto":5,"4|laranja":5,"6|preto":5,"6|laranja":5,"8|preto":5,"8|laranja":5,"10|preto":5,"10|laranja":5}},{"id":"conjunto-mily-ice-cream-91009","nome":"Mily Ice Cream","tipo":"Conjunto","idade":"4-10a","preco":121.6,"cores":["azul claro e branco","rosa"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-mily-ice-cream-91009.jpg","descricao":"Conjunto infantil em cotton com estampa divertida de sorvete. Blusa com manga curta e estampa em silk. Saia com estampa digital exclusiva, cós elástico e babado na barra, que traz charme e movimento.","ativo":true,"estoque":{"4|azul claro e branco":5,"4|rosa":5,"6|azul claro e branco":5,"6|rosa":5,"8|azul claro e branco":5,"8|rosa":5,"10|azul claro e branco":5,"10|rosa":5}},{"id":"conjunto-arco-iris-mily-91012","nome":"Arco Íris Mily","tipo":"Conjunto","idade":"4-10a","preco":108.8,"cores":["branco","rosa e branco"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-arco-iris-mily-91012.jpg","descricao":"Conjunto infantil em cotton com estampa divertida e colorida. Blusa com manga curta e lacinho nos ombros. Saia com estampa digital exclusiva, cós elástico e babado na barra, que traz charme e movimento.","ativo":true,"estoque":{"4|branco":5,"4|rosa e branco":5,"6|branco":5,"6|rosa e branco":5,"8|branco":5,"8|rosa e branco":5,"10|branco":5,"10|rosa e branco":5}},{"id":"conjunto-mily-girl-91028","nome":"Mily Girl","tipo":"Conjunto","idade":"4-10a","preco":108.8,"cores":["branco e rosa","rosa claro e preto"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-mily-girl-91028.jpg","descricao":"Conjunto infantil em cotton com estampa exclusiva Mily Girl. Blusa com manga curta e detalhe canelado contrastante. Shorts xadrez vichy com cós elástico e bolsos laterais, unindo conforto e estilo para o dia a dia!","ativo":true,"estoque":{"4|branco e rosa":5,"4|rosa claro e preto":5,"6|branco e rosa":5,"6|rosa claro e preto":5,"8|branco e rosa":5,"8|rosa claro e preto":5,"10|branco e rosa":5,"10|rosa claro e preto":5}},{"id":"conjunto-mily-com-calca-91008","nome":"Mily com Calça","tipo":"Conjunto","idade":"4-10a","preco":131.2,"cores":["verde escuro e rosa","rosa claro e rosa"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-mily-com-calca-91008.jpg","descricao":"Conjunto infantil em cotton com estampa exclusiva Mily. Blusa com manga curta e detalhe vazado nos ombros. Calça pantalona com cós elástico, faixa para amarração e estampa floral com cachorrinhos.","ativo":true,"estoque":{"4|verde escuro e rosa":5,"4|rosa claro e rosa":5,"6|verde escuro e rosa":5,"6|rosa claro e rosa":5,"8|verde escuro e rosa":5,"8|rosa claro e rosa":5,"10|verde escuro e rosa":5,"10|rosa claro e rosa":5}},{"id":"conjunto-mily-sweet-91207","nome":"Mily Sweet","tipo":"Conjunto","idade":"4-10a","preco":136,"cores":["laranja listrado","verde claro listrado"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-mily-sweet-91207.jpg","descricao":"Conjunto infantil com blusa em cotton com babado e amarração nas alças. Shorts listrado com bolso e elástico na cintura. Leve, confortável e perfeito para dias de verão!","ativo":true,"estoque":{"4|laranja listrado":5,"4|verde claro listrado":5,"6|laranja listrado":5,"6|verde claro listrado":5,"8|laranja listrado":5,"8|verde claro listrado":5,"10|laranja listrado":5,"10|verde claro listrado":5}},{"id":"conjunto-mily-care-90998","nome":"Mily Care","tipo":"Conjunto","idade":"4-10a","preco":108.8,"cores":["azul claro e branco","rosa claro e branco"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-mily-care-90998.jpg","descricao":"Conjunto infantil em cotton com estampa fofa e delicada. Blusa com detalhe de renda nas mangas e amarração na barra. Shorts saia com estampa divertida e cós elástico.","ativo":true,"estoque":{"4|azul claro e branco":5,"4|rosa claro e branco":5,"6|azul claro e branco":5,"6|rosa claro e branco":5,"8|azul claro e branco":5,"8|rosa claro e branco":5,"10|azul claro e branco":5,"10|rosa claro e branco":5}},{"id":"conjunto-mily-soft-91192","nome":"Mily Soft","tipo":"Conjunto","idade":"4-10a","preco":83.2,"cores":["branco estampado","rosa claro estampado"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-mily-soft-91192.jpg","descricao":"Conjunto infantil em cotton com estampa fofa e delicada. Blusa com abertura nos ombros e estampa frontal divertida. Calça legging estampada com elástico no cós.","ativo":true,"estoque":{"4|branco estampado":5,"4|rosa claro estampado":5,"6|branco estampado":5,"6|rosa claro estampado":5,"8|branco estampado":5,"8|rosa claro estampado":5,"10|branco estampado":5,"10|rosa claro estampado":5}},{"id":"conjunto-mily-fruit-91187","nome":"Mily Fruit","tipo":"Conjunto","idade":"4-10a","preco":104,"cores":["branco estampado","laranja estampado"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-mily-fruit-91187.jpg","descricao":"Conjunto infantil em cotton com estampa de frutas super coloridas e divertidas. Blusa regata com estampa frontal e shorts com elástico na cintura.","ativo":true,"estoque":{"4|branco estampado":5,"4|laranja estampado":5,"6|branco estampado":5,"6|laranja estampado":5,"8|branco estampado":5,"8|laranja estampado":5,"10|branco estampado":5,"10|laranja estampado":5}},{"id":"conjunto-mily-cactus-ii-91220","nome":"Mily Cactus II","tipo":"Conjunto","idade":"4-10a","preco":99.2,"cores":["branco e rosa","branco e marinho"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-mily-cactus-ii-91220.jpg","descricao":"Conjunto infantil com blusa em cotton com estampa de cactos fofa e cheia de cor. Blusa com mangas babado e shorts com elástico na cintura e bolso frontal.","ativo":true,"estoque":{"4|branco e rosa":5,"4|branco e marinho":5,"6|branco e rosa":5,"6|branco e marinho":5,"8|branco e rosa":5,"8|branco e marinho":5,"10|branco e rosa":5,"10|branco e marinho":5}},{"id":"conjunto-mily-90996","nome":"Mily","tipo":"Conjunto","idade":"4-10a","preco":108.8,"cores":["branco e verde oliva","branco e cinza"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-mily-90996.jpg","descricao":"Conjunto infantil em cotton com blusa de ombro vazado estampada e mangas com babado. Shorts com elástico na cintura e detalhe de laço frontal.","ativo":true,"estoque":{"4|branco e verde oliva":5,"4|branco e cinza":5,"6|branco e verde oliva":5,"6|branco e cinza":5,"8|branco e verde oliva":5,"8|branco e cinza":5,"10|branco e verde oliva":5,"10|branco e cinza":5}},{"id":"conjunto-mily-girl-happiness-91004","nome":"Mily Girl Happiness","tipo":"Conjunto","idade":"4-10a","preco":108.8,"cores":["branco e bege","branco e cinza"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-mily-girl-happiness-91004.jpg","descricao":"Conjunto infantil em cotton com blusa branca com recorte colorido e estampa \"Girl Happiness\". Shorts com elástico na cintura e detalhe de amarração.","ativo":true,"estoque":{"4|branco e bege":5,"4|branco e cinza":5,"6|branco e bege":5,"6|branco e cinza":5,"8|branco e bege":5,"8|branco e cinza":5,"10|branco e bege":5,"10|branco e cinza":5}},{"id":"macacao-mily-fada-91191","nome":"Mily Fada","tipo":"Macacão","idade":"4-10a","preco":92.8,"cores":["verde água","branco"],"tamanhos":[4,6,8,10],"foto":"fotos/macacao-mily-fada-91191.jpg","descricao":"Macacão infantil em viscose com estampa de fadinhas. Detalhe de babado ombro a ombro com alças e elástico na cintura com laço decorativo.","ativo":true,"estoque":{"4|verde água":5,"4|branco":5,"6|verde água":5,"6|branco":5,"8|verde água":5,"8|branco":5,"10|verde água":5,"10|branco":5}},{"id":"conjunto-street-mily-91113","nome":"Street Mily","tipo":"Conjunto","idade":"4-10a","preco":147.2,"cores":["azul","pink"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-street-mily-91113.jpg","descricao":"Conjunto infantil em cotton com estampa de pug. Colete em cirrê holográfico com capuz e bolsos. Shorts com elástico na cintura e detalhe holográfico.","ativo":true,"estoque":{"4|azul":5,"4|pink":5,"6|azul":5,"6|pink":5,"8|azul":5,"8|pink":5,"10|azul":5,"10|pink":5}},{"id":"conjunto-mily-sweet-flores-91112","nome":"Mily Sweet Flores","tipo":"Conjunto","idade":"4-10a","preco":142.4,"cores":["verde menta","pink"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-mily-sweet-flores-91112.jpg","descricao":"Conjunto infantil em cotton com estampa de flores e escrita \"mily mily mily\". Blusa com mangas em tule e elástico colorido na barra. Shorts com elástico na cintura e cordão decorativo.","ativo":true,"estoque":{"4|verde menta":5,"4|pink":5,"6|verde menta":5,"6|pink":5,"8|verde menta":5,"8|pink":5,"10|verde menta":5,"10|pink":5}},{"id":"conjunto-mily-lhama-saia-91212","nome":"Mily Lhama Saia","tipo":"Conjunto","idade":"4-10a","preco":126.4,"cores":["branco","lilás"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-mily-lhama-saia-91212.jpg","descricao":"Conjunto infantil em cotton com estampa de lhama. Blusa com babados nas mangas e estampa frontal. Saia com cós em elástico, laço decorativo e babado duplo com estampa exclusiva.","ativo":true,"estoque":{"4|branco":5,"4|lilás":5,"6|branco":5,"6|lilás":5,"8|branco":5,"8|lilás":5,"10|branco":5,"10|lilás":5}},{"id":"conjunto-mily-bordado-91110","nome":"Mily Bordado","tipo":"Conjunto","idade":"4-10a","preco":124.8,"cores":["rosa","vermelho e azul"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-mily-bordado-91110.jpg","descricao":"Conjunto infantil em cotton. Blusa com bordado e estampa frontal. Shorts com elástico na cintura e cordão decorativo.","ativo":true,"estoque":{"4|rosa":5,"4|vermelho e azul":5,"6|rosa":5,"6|vermelho e azul":5,"8|rosa":5,"8|vermelho e azul":5,"10|rosa":5,"10|vermelho e azul":5}},{"id":"conjunto-mily-care-renda-91106","nome":"Mily Care Renda","tipo":"Conjunto","idade":"4-10a","preco":152,"cores":["off white","rosa claro"],"tamanhos":[4,6,8,10],"foto":"fotos/conjunto-mily-care-renda-91106.jpg","descricao":"Conjunto infantil em cotton. Blusa com aplicação de flores em relevo e detalhe de pérolas. Saia com pregas, cintura em elástico e faixa decorativa com laço.","ativo":true,"estoque":{"4|off white":5,"4|rosa claro":5,"6|off white":5,"6|rosa claro":5,"8|off white":5,"8|rosa claro":5,"10|off white":5,"10|rosa claro":5}},{"id":"conjunto-mily-juvenil-soft-91254","nome":"Mily Juvenil Soft","tipo":"Conjunto","idade":"10-14a","preco":120,"cores":["marinho","mescla cinza"],"tamanhos":[10,12,14],"foto":"fotos/conjunto-mily-juvenil-soft-91254.jpg","descricao":"Conjunto juvenil em moletinho soft. Blusa com recorte nas mangas e estampa frontal. Shorts com elástico na cintura e bolsos funcionais.","ativo":true,"estoque":{"10|marinho":5,"10|mescla cinza":5,"12|marinho":5,"12|mescla cinza":5,"14|marinho":5,"14|mescla cinza":5}},{"id":"conjunto-moment-mily-91250","nome":"Moment Mily","tipo":"Conjunto","idade":"10-14a","preco":124.8,"cores":["amarelo claro","pink"],"tamanhos":[10,12,14],"foto":"fotos/conjunto-moment-mily-91250.jpg","descricao":"Conjunto juvenil em cotton. Blusa com estampa frontal. Shorts com elástico na cintura e cadarço para ajuste. Detalhe de fita lateral com escrita \"Moment Mily\".","ativo":true,"estoque":{"10|amarelo claro":5,"10|pink":5,"12|amarelo claro":5,"12|pink":5,"14|amarelo claro":5,"14|pink":5}},{"id":"conjunto-mily-juvenil-charm-91023","nome":"Mily Juvenil Charm","tipo":"Conjunto","idade":"10-14a","preco":132.8,"cores":["rosa claro e cinza","rosa claro e preto"],"tamanhos":[10,12,14],"foto":"fotos/conjunto-mily-juvenil-charm-91023.jpg","descricao":"Conjunto juvenil em cotton. Blusa com estampa frontal em paetês e detalhe de estrela. Decote moderno ombro a ombro com alça personalizada. Short com vivo contrastante, cós com elástico e cordão decorativo.","ativo":true,"estoque":{"10|rosa claro e cinza":5,"10|rosa claro e preto":5,"12|rosa claro e cinza":5,"12|rosa claro e preto":5,"14|rosa claro e cinza":5,"14|rosa claro e preto":5}},{"id":"conjunto-mily-lovely-91247","nome":"Mily Lovely","tipo":"Conjunto","idade":"10-14a","preco":120,"cores":["branco e preto","rosa claro e cinza"],"tamanhos":[10,12,14],"foto":"fotos/conjunto-mily-lovely-91247.jpg","descricao":"Conjunto juvenil em cotton. Blusa com estampa frontal em lettering \"Lovely\" e detalhes de estrelas. Decote moderno com gota. Short com vivo contrastante, laterais decoradas com estrelas, cós com elástico e cordão decorativo.","ativo":true,"estoque":{"10|branco e preto":5,"10|rosa claro e cinza":5,"12|branco e preto":5,"12|rosa claro e cinza":5,"14|branco e preto":5,"14|rosa claro e cinza":5}},{"id":"conjunto-mily-juvenil-my-heart-90805","nome":"Mily Juvenil My Heart","tipo":"Conjunto","idade":"10-14a","preco":124.8,"cores":["branco e preto","branco e rosa"],"tamanhos":[10,12,14],"foto":"fotos/conjunto-mily-juvenil-my-heart-90805.jpg","descricao":"Conjunto juvenil em cotton. Blusa com estampa frontal em paetês e detalhes de laços nas mangas. Decote moderno com gota. Short com bordado \"Mily\", cós com botão e bolsos funcionais.","ativo":true,"estoque":{"10|branco e preto":5,"10|branco e rosa":5,"12|branco e preto":5,"12|branco e rosa":5,"14|branco e preto":5,"14|branco e rosa":5}},{"id":"conjunto-mily-style-juvenil-91251","nome":"Mily Style Juvenil","tipo":"Conjunto","idade":"10-14a","preco":120,"cores":["preto e rosa","cinza e rosa"],"tamanhos":[10,12,14],"foto":"fotos/conjunto-mily-style-juvenil-91251.jpg","descricao":"Conjunto juvenil em cotton. Blusa cropped com estampa moderna \"Mily\" em silk. Short com cós elástico e cordão ajustável. Detalhes de recortes laterais com viés contrastante.","ativo":true,"estoque":{"10|preto e rosa":5,"10|cinza e rosa":5,"12|preto e rosa":5,"12|cinza e rosa":5,"14|preto e rosa":5,"14|cinza e rosa":5}},{"id":"conjunto-perolas-mily-91242","nome":"Pérolas Mily","tipo":"Conjunto","idade":"10-14a","preco":120,"cores":["cinza","rosa claro"],"tamanhos":[10,12,14],"foto":"fotos/conjunto-perolas-mily-91242.jpg","descricao":"Conjunto juvenil em cotton. Blusa com aplicação de pérolas em diversos tamanhos. Short com cós elástico, bolsos laterais e detalhes de pérolas na lateral.","ativo":true,"estoque":{"10|cinza":5,"10|rosa claro":5,"12|cinza":5,"12|rosa claro":5,"14|cinza":5,"14|rosa claro":5}},{"id":"conjunto-mily-neon-91253","nome":"Mily Neon","tipo":"Conjunto","idade":"10-14a","preco":120,"cores":["cinza neon","preto neon"],"tamanhos":[10,12,14],"foto":"fotos/conjunto-mily-neon-91253.jpg","descricao":"Conjunto juvenil em cotton. Blusa com detalhe de escrita \"Relaxation\" em strass neon e manga com viés neon. Short com cós elástico, bolsos laterais e faixa lateral com escrita \"Mily\".","ativo":true,"estoque":{"10|cinza neon":5,"10|preto neon":5,"12|cinza neon":5,"12|preto neon":5,"14|cinza neon":5,"14|preto neon":5}},{"id":"conjunto-mily-friends-91252","nome":"Mily Friends","tipo":"Conjunto","idade":"10-14a","preco":124.8,"cores":["laranja","verde neon"],"tamanhos":[10,12,14],"foto":"fotos/conjunto-mily-friends-91252.jpg","descricao":"Conjunto juvenil em cotton. Blusa com estampa \"Friends\" e desenho de coroas. Amarração frontal. Short com cós elástico, bolsos frontais e acabamento em viés neon.","ativo":true,"estoque":{"10|laranja":5,"10|verde neon":5,"12|laranja":5,"12|verde neon":5,"14|laranja":5,"14|verde neon":5}},{"id":"conjunto-mily-party-91248","nome":"Mily Party","tipo":"Conjunto","idade":"10-14a","preco":126.4,"cores":["rosa","laranja"],"tamanhos":[10,12,14],"foto":"fotos/conjunto-mily-party-91248.jpg","descricao":"Conjunto juvenil em cotton. Blusa cropped com estampa \"Mily\" e detalhe de fita personalizada nas mangas. Short com cós elástico e cordão para ajuste. Bolsos laterais.","ativo":true,"estoque":{"10|rosa":5,"10|laranja":5,"12|rosa":5,"12|laranja":5,"14|rosa":5,"14|laranja":5}},{"id":"conjunto-mily-sparkle-91249","nome":"Mily Sparkle","tipo":"Conjunto","idade":"10-14a","preco":120,"cores":["branco e rosa","branco e cinza"],"tamanhos":[10,12,14],"foto":"fotos/conjunto-mily-sparkle-91249.jpg","descricao":"Conjunto juvenil em cotton. Blusa cropped com estampa \"Sparkle\" e mangas coloridas. Short com cós elástico e cordão para ajuste. Faixa personalizada nas laterais.","ativo":true,"estoque":{"10|branco e rosa":5,"10|branco e cinza":5,"12|branco e rosa":5,"12|branco e cinza":5,"14|branco e rosa":5,"14|branco e cinza":5}},{"id":"conjunto-mily-sneaker-91027","nome":"Mily Sneaker","tipo":"Conjunto","idade":"10-14a","preco":126.4,"cores":["cinza e café","rosa e cinza"],"tamanhos":[10,12,14],"foto":"fotos/conjunto-mily-sneaker-91027.jpg","descricao":"Conjunto juvenil em cotton. Blusa com estampa de tênis e detalhe ombreira vazada com viés animal print. Short com cós elástico e cordão para ajuste. Bolsos com detalhe animal print.","ativo":true,"estoque":{"10|cinza e café":5,"10|rosa e cinza":5,"12|cinza e café":5,"12|rosa e cinza":5,"14|cinza e café":5,"14|rosa e cinza":5}}],"cupons":[],"promocoes":[],"afiliados":[]}</script>
+<script>
+(function (comecar) {
+  var D = {};
+  try { D = JSON.parse(document.getElementById('dados-loja').textContent) || {}; } catch (e) { D = {}; }
+  /* hospedado com o Supabase: o catálogo que o painel publica fica no banco, e o bloco acima vira a reserva */
+  if (window.CABIDINO_NUVEM) window.CABIDINO_NUVEM.lerLoja(D).then(comecar); else comecar(D);
+})(function (D) {
+  D = D || {};
+  ['produtos', 'cupons', 'promocoes', 'afiliados', 'recados', 'falas'].forEach(function (k) { if (!Array.isArray(D[k])) D[k] = []; });
+  D.loja = D.loja || {}; D.textos = D.textos || {};
+  window.CABIDINO_DADOS = D; /* o painel parte desta cópia */
+  var L = D.loja;
+  var P = D.produtos.filter(function (p) { return p.ativo !== false; });
+  var porId = {}; P.forEach(function (p) { porId[p.id] = p; });
+  var $ = function (s) { return document.querySelector(s); };
+  var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+  var esc = function (t) { return String(t == null ? '' : t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  /* Faixas da loja: uma peça entra na faixa se tiver algum tamanho dentro dela */
+  var FAIXAS = {
+    '1-3': { nome: 'Primeiros passos', idade: '1 a 3 anos', min: 1, max: 3, foto: 'fotos-hd/conjunto-mily-tule-90749.jpg', dino: 'dina' },
+    '4-6': { nome: 'Pequenos exploradores', idade: '4 a 6 anos', min: 4, max: 6, foto: 'fotos-hd/conjunto-mily-ice-cream-91009.jpg', dino: 'dino' },
+    '7-10': { nome: 'Pequenos grandes', idade: '7 a 10 anos', min: 7, max: 10, foto: 'fotos-hd/conjunto-mily-com-calca-91008.jpg', dino: 'dina' },
+    '11-14': { nome: 'Quase gente grande', idade: '11 a 14 anos', min: 11, max: 14, foto: 'fotos-hd/conjunto-mily-sneaker-91027.jpg', dino: 'dino' }
+  };
+  var IDADE_PRODUTO = { '1-3a': '1 a 3 anos', '4-10a': '4 a 10 anos', '10-14a': '10 a 14 anos' };
+  var naFaixa = function (p, k) { var f = FAIXAS[k]; return p.tamanhos.some(function (t) { return t >= f.min && t <= f.max; }); };
+  var CORES = {
+    'pink': '#E3649F', 'rosa': '#F1B8C2', 'rosa claro': '#F8D7DC', 'branco': '#FFFFFF', 'off white': '#F6F1E7',
+    'preto': '#2C2A2A', 'marinho': '#2F3D63', 'azul': '#6F9BD1', 'azul claro': '#BAD5EE', 'verde': '#7FA56E',
+    'verde água': '#9FD8CF', 'verde menta': '#BFE5CF', 'verde claro': '#C8E3B8', 'verde escuro': '#3E6B4C',
+    'verde oliva': '#8A8F5A', 'turquesa': '#3FB8B0', 'laranja': '#F2A15F', 'amarelo': '#F4D35E',
+    'amarelo claro': '#F7E8A8', 'pêssego': '#F7C4A5', 'bege': '#E6D3B8', 'vermelho': '#D2544A', 'coral': '#F08A7E',
+    'lilás': '#C8A9E0', 'lavanda': '#DACDF0', 'cinza': '#B7B4B2', 'mescla cinza': '#A9A7A5', 'café': '#7A5640'
+  };
+  var brl = function (v) { return Number(v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); };
+  var freteGratis = Number(L.freteGratisAcima) || 0;
+  var parcelas = Number(L.parcelasSemJuros) || 0;
+  var porFoto = function (trecho) { return P.filter(function (p) { return p.foto.indexOf(trecho) > -1; })[0]; };
+  var semAcento = function (t) { return String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); };
+  var nomeCompleto = function (p) { return p.tipo + ' Infantil - ' + p.nome; };
+  var hoje = new Date().toISOString().slice(0, 10);
+  var vigente = function (x) { return x && x.ativa !== false && x.ativo !== false && (!x.inicio || x.inicio <= hoje) && (!x.fim || x.fim >= hoje) && (!x.validade || x.validade >= hoje); };
+
+  /* ---------- Promoções: o maior desconto vigente que vale para a peça ---------- */
+  function descontoDe(p) {
+    var melhor = 0;
+    D.promocoes.forEach(function (pr) {
+      if (!vigente(pr)) return;
+      var vale = pr.alvo === 'todas' || pr.alvo === 'p:' + p.id || (FAIXAS[pr.alvo] && naFaixa(p, pr.alvo));
+      if (vale) melhor = Math.max(melhor, Number(pr.desconto) || 0);
+    });
+    return Math.min(90, melhor);
+  }
+  function precoDe(p) { var d = descontoDe(p); return Math.round(p.preco * (1 - d / 100) * 100) / 100; }
+  function precoHTML(p, classe) {
+    var d = descontoDe(p);
+    return d ? '<span class="' + classe + '">' + brl(precoDe(p)) + '</span> <s class="preco-antigo">' + brl(p.preco) + '</s>' : '<span class="' + classe + '">' + brl(p.preco) + '</span>';
+  }
+
+  /* ---------- Estoque: chave "tamanho|cor"; peça sem controle de estoque é sempre disponível ---------- */
+  function estoqueDe(p, tam, cor) { if (!p.estoque) return 99; var v = p.estoque[tam + '|' + cor]; return v == null ? 0 : Number(v) || 0; }
+  function esgotada(p) { if (!p.estoque) return false; return !Object.keys(p.estoque).some(function (k) { return Number(p.estoque[k]) > 0; }); }
+
+  /* ---------- Textos editados pelo painel ---------- */
+  var limparHTML = function (h) { return String(h).replace(/<(?!\/?(em|b|strong|br)\b)[^>]*>/gi, ''); };
+  $$('[data-texto]').forEach(function (el) { var t = D.textos[el.dataset.texto]; if (typeof t === 'string' && t.trim()) el.innerHTML = limparHTML(t); });
+
+  function fundoCor(nome) {
+    var n = nome.toLowerCase().replace(/ (listrado|estampado|neon)$/, '');
+    if (n.indexOf('arco-íris') === 0) return 'linear-gradient(135deg,#F4A6A6,#F7DC8C,#A8D8B9,#A9C6EC,#CDB2E6)';
+    var partes = n.split(' e ').map(function (c) { return CORES[c] || '#CFC6C1'; });
+    return partes.length > 1 ? 'linear-gradient(135deg,' + partes[0] + ' 50%,' + partes[1] + ' 50%)' : partes[0];
+  }
+  function tamanhoPara(idade) { return idade <= 3 ? idade : (idade % 2 === 0 ? idade : idade + 1); }
+  function faixaPara(idade) { return idade <= 3 ? '1-3' : idade <= 6 ? '4-6' : idade <= 10 ? '7-10' : '11-14'; }
+
+  /* ---------- Céu do fundo: dinos astronautas, Saturno, lua e estrelas ---------- */
+  (function () {
+    var lista = [
+      ['dino-astro', 70], ['estrela', 18], ['brilho', 14], ['saturno', 100], ['estrela', 12], ['dina', 52],
+      ['brilho', 18], ['lua', 64], ['estrela', 16], ['dino', 48], ['brilho', 11], ['dino-saturno', 112],
+      ['estrela', 20], ['planeta', 34], ['brilho', 15], ['dina-astro', 66], ['estrela', 13], ['brilho', 12],
+      ['saturno', 84], ['estrela', 17], ['dino', 42], ['brilho', 16], ['estrela', 11], ['dina', 44],
+      ['brilho', 13], ['estrela', 15], ['saturno', 58], ['dino-astro', 54], ['brilho', 14], ['estrela', 19],
+      ['planeta', 26], ['estrela', 12], ['brilho', 17], ['estrela', 14], ['dina', 40], ['brilho', 12]
+    ];
+    var caixas = { saturno: '0 0 140 90', 'dino-saturno': '0 -14 140 134', lua: '0 0 80 80', planeta: '0 0 60 60', estrela: '0 0 40 40', brilho: '0 0 40 40' };
+    var semente = 11, sorte = function () { semente = (semente * 9301 + 49297) % 233280; return semente / 233280; };
+    var celular = window.innerWidth < 700;
+    var qtd = celular ? 18 : lista.length, colunas = celular ? 3 : 6, linhas = Math.ceil(qtd / colunas);
+    var html = '<div class="luz l1"></div><div class="luz l2"></div><div class="luz l3"></div><div class="luz l4"></div><div class="luz l5"></div>';
+    for (var k = 0; k < 4; k++) {
+      html += '<span class="cometa" style="left:' + (60 + sorte() * 45).toFixed(1) + '%;top:' + (4 + k * 18 + sorte() * 10).toFixed(1) + '%;' +
+        '--t:' + (9 + sorte() * 7).toFixed(1) + 's;--d:-' + (k * 3.3 + sorte() * 2).toFixed(1) + 's"></span>';
+    }
+    for (var j = 0; j < (celular ? 40 : 95); j++) {
+      html += '<span class="poeira" style="left:' + (sorte() * 100).toFixed(1) + '%;top:' + (sorte() * 100).toFixed(1) + '%;--s:' + (1.5 + sorte() * 2.5).toFixed(1) + 'px;' +
+        '--t:' + (2.5 + sorte() * 4).toFixed(1) + 's;--d:-' + (sorte() * 6).toFixed(1) + 's"></span>';
+    }
+    for (var i = 0; i < qtd; i++) {
+      var tipo = lista[i][0], pisca = tipo === 'estrela' || tipo === 'brilho', bicho = tipo.indexOf('din') === 0 && tipo !== 'dino-saturno';
+      var tam = lista[i][1] * (pisca ? 1.4 : 1.15) * (celular ? .8 : 1);
+      var esq = (i % colunas) * (100 / colunas) + sorte() * (100 / colunas - 6);
+      var topo = Math.floor(i / colunas) * (100 / linhas) + sorte() * (100 / linhas - 8);
+      var op = bicho ? .62 : pisca ? 1 : .85;
+      var brincadeira = sorte(), classes = (pisca ? ' pisca' : '') +
+        (tipo === 'lua' || tipo === 'saturno' || tipo === 'dino-saturno' ? ' brilha' : '') +
+        (bicho ? ' bicho' + (brincadeira < .3 ? ' girar' : brincadeira < .6 ? ' orbita' : '') : '') +
+        (bicho && sorte() > .5 ? ' espelho' : '');
+      if (tipo === 'dino-saturno') op = .8;
+      html += '<div class="astro' + classes + '" style="left:' + esq.toFixed(1) + '%;top:' + topo.toFixed(1) + '%;' +
+        'width:' + tam.toFixed(0) + 'px;opacity:' + op + ';--o:' + op + ';' +
+        '--t:' + (pisca ? 2.5 + sorte() * 3 : 10 + sorte() * 8).toFixed(1) + 's;--d:-' + (sorte() * 10).toFixed(1) + 's;' +
+        '--x:' + (sorte() * 40 - 20).toFixed(0) + 'px;--r1:' + (-6 - sorte() * 10).toFixed(0) + 'deg;--r2:' + (6 + sorte() * 10).toFixed(0) + 'deg">' +
+        '<svg viewBox="' + (caixas[tipo] || '0 0 200 200') + '"><use href="#' + tipo + '"/></svg></div>';
+    }
+    $('#ceu').innerHTML = html;
+  })();
+
+  /* ---------- Menu ---------- */
+  var itensMenu = [['todas', 'Novidades'], ['meninas', 'Meninas'], ['1-3', '1 a 3 anos'], ['4-6', '4 a 6 anos'], ['7-10', '7 a 10 anos'], ['11-14', '11 a 14 anos'], ['dicas', 'Dicas do Dino']];
+  if (D.promocoes.some(vigente)) itensMenu.splice(1, 0, ['promo', 'Promoções']);
+  $$('[data-menu]').forEach(function (ul) {
+    ul.innerHTML = itensMenu.map(function (m) {
+      return '<li><a href="#' + (m[0] === 'dicas' ? 'dicas' : 'vitrine') + '" data-ir="' + m[0] + '">' + m[1] + '</a></li>';
+    }).join('');
+  });
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-ir]'); if (!a || a.dataset.ir === 'dicas') return;
+    e.preventDefault(); termo = ''; $('#busca-campo').value = '';
+    irParaFiltro(a.dataset.ir === 'meninas' ? 'todas' : a.dataset.ir);
+  });
+
+  /* ---------- Faixa de recados ---------- */
+  var recados = D.recados.length ? D.recados : ['Frete grátis acima de ' + brl(freteGratis)];
+  var rec = 0, elRec = $('#recado');
+  function mostrarRecado(n) {
+    rec = (n + recados.length) % recados.length;
+    elRec.classList.add('trocando');
+    setTimeout(function () { elRec.textContent = recados[rec]; elRec.classList.remove('trocando'); }, 300);
+  }
+  elRec.textContent = recados[0];
+  var timerRec = setInterval(function () { mostrarRecado(rec + 1); }, 5000);
+  function recadoManual(passo) { clearInterval(timerRec); mostrarRecado(rec + passo); timerRec = setInterval(function () { mostrarRecado(rec + 1); }, 5000); }
+  $('#recado-ant').addEventListener('click', function () { recadoManual(-1); });
+  $('#recado-prox').addEventListener('click', function () { recadoManual(1); });
+
+  /* ---------- textos da loja ---------- */
+  $('#promessa-frete').textContent = 'Frete grátis acima de ' + brl(freteGratis).replace(',00', '');
+  /* ---------- Joguinho: Pula, Dino! (faixa do rodapé) ---------- */
+  function criarJogo(raiz, op) {
+    var q = function (s) { return raiz.querySelector(s); };
+    var area = q('.jogo-area'), dino = q('[data-dino]'), fala = q('[data-fala]'), dinaSvg = q('.jogo-dina svg');
+    var capa = q('[data-capa]'), dica = q('[data-dica]'), elPontos = q('[data-pontos]'), elRec = q('[data-recorde]');
+    var CHAVE_REC = 'cabidino-recorde-' + op.nome, recorde = 0;
+    try { recorde = Number(localStorage.getItem(CHAVE_REC)) || 0; } catch (e) { recorde = 0; }
+    var e = op.escala, rodando = false, y = 0, vy = 0, vel = 0, pontos = 0, cactos = [], proximo = 0, ultimo = 0;
+    var torcida = ['Isso, Dino!', 'Que pulo!', 'Uhul!', 'Você é demais!', 'Vai, vai!', 'Lindo pulo!'];
+    function mostrarRecorde() { if (elRec) elRec.textContent = recorde ? (capa ? 'Recorde: ' + recorde + ' pontos' : '· recorde ' + recorde) : ''; }
+    function falar(t) { fala.textContent = t; dinaSvg.classList.remove('feliz'); void dinaSvg.getBoundingClientRect(); dinaSvg.classList.add('feliz'); }
+    function pular() { if (rodando && y === 0) { vy = op.impulso; area.classList.add('pulando'); } }
+    function novoCacto() {
+      var alto = Math.random() < .35, w = (alto ? 24 : 30) * e, h = (alto ? 44 : 30) * e, el = document.createElement('div');
+      el.className = 'cactinho'; el.style.width = w + 'px';
+      el.innerHTML = '<svg viewBox="0 0 30 ' + (alto ? 44 : 32) + '" aria-hidden="true"><use href="#' + (alto ? 'cacto-alto' : 'cacto') + '"/></svg>';
+      area.appendChild(el);
+      cactos.push({ el: el, x: area.clientWidth + 10, w: w, h: h, contou: false });
+    }
+    function bateu(c) {
+      var dl = dino.offsetLeft + dino.offsetWidth * .2, dr = dino.offsetLeft + dino.offsetWidth * .76;
+      return c.x < dr && c.x + c.w * .85 > dl && y + 3 < c.h * .8;
+    }
+    function quadro(agora) {
+      if (!rodando) return;
+      var dt = Math.min(.035, (agora - ultimo) / 1000); ultimo = agora;
+      if (vy !== 0 || y > 0) { vy -= op.gravidade * dt; y = Math.max(0, y + vy * dt); if (y === 0) { vy = 0; area.classList.remove('pulando'); } }
+      dino.style.transform = 'translateY(' + (-y) + 'px)';
+      proximo -= vel * dt;
+      if (proximo <= 0) { novoCacto(); proximo = (190 + Math.random() * 170) * Math.max(e, .85) + vel * .25; }
+      for (var i = cactos.length - 1; i >= 0; i--) {
+        var c = cactos[i]; c.x -= vel * dt; c.el.style.transform = 'translateX(' + c.x + 'px)';
+        if (!c.contou && c.x + c.w < dino.offsetLeft) {
+          c.contou = true; pontos++; elPontos.textContent = pontos; vel = Math.min(op.velMax, vel + 9);
+          if (pontos % 5 === 0) {
+            falar(torcida[Math.floor(Math.random() * torcida.length)]);
+            var h = document.createElement('span'); h.className = 'coracao-jogo'; h.innerHTML = '<svg viewBox="0 0 24 22"><use href="#coracao"/></svg>';
+            h.style.right = '40px'; h.style.top = '8px'; area.appendChild(h); setTimeout(function () { h.remove(); }, 900);
+          }
+        }
+        if (c.x < -40) { c.el.remove(); cactos.splice(i, 1); continue; }
+        if (bateu(c)) return terminar();
+      }
+      requestAnimationFrame(quadro);
+    }
+    function terminar() {
+      rodando = false; area.classList.remove('correndo', 'pulando');
+      var novo = pontos > recorde;
+      if (novo) { recorde = pontos; try { localStorage.setItem(CHAVE_REC, String(recorde)); } catch (er) {} }
+      falar(pontos ? 'Ops! De novo?' : 'Ops! Tenta de novo!'); mostrarRecorde();
+      dica.textContent = (novo && pontos ? 'Novo recorde: ' : 'Ops! ') + pontos + (pontos === 1 ? ' ponto' : ' pontos') + '. Clique para jogar de novo';
+      dica.hidden = false;
+    }
+    function comecar() {
+      cactos.forEach(function (c) { c.el.remove(); }); cactos = [];
+      y = 0; vy = 0; vel = op.velInicial; pontos = 0; proximo = 120 * e; elPontos.textContent = 0;
+      dino.style.transform = ''; if (dica) dica.hidden = true; falar('Pula, Dino!');
+      rodando = true; area.classList.add('correndo'); area.focus({ preventScroll: true });
+      ultimo = performance.now(); requestAnimationFrame(quadro);
+    }
+    area.addEventListener('pointerdown', function (ev) { ev.preventDefault(); if (!rodando) comecar(); else pular(); });
+    area.addEventListener('keydown', function (ev) {
+      if (ev.key !== ' ' && ev.key !== 'ArrowUp') return;
+      ev.preventDefault(); if (!rodando) comecar(); else pular();
+    });
+    mostrarRecorde();
+  }
+  criarJogo($('#barra-dino'), { nome: 'faixa', escala: .72, impulso: 560, gravidade: 2500, velInicial: 230, velMax: 520 });
+  $$('[data-preco]').forEach(function (el) { var p = porFoto(el.dataset.preco); if (p) el.textContent = brl(precoDe(p)); });
+  $('#legal-texto').textContent = '© ' + new Date().getFullYear() + ' Cabidino · ' + [L.razaoSocial, L.cnpj, L.cidade].filter(Boolean).join(' · ');
+  var zapBonito = (L.whatsapp || '').replace(/^55(\d{2})(\d{4,5})(\d{4})$/, '($1) $2-$3');
+  $('#ct-zap-txt').textContent = zapBonito || 'WhatsApp a configurar';
+  if (L.whatsapp) {
+    var linkZap = 'https://wa.me/' + L.whatsapp + '?text=' + encodeURIComponent('Olá, Cabidino! Vim pelo site e gostaria de mais informações.');
+    ['#ct-zap', '#util-zap'].forEach(function (s) { $(s).href = linkZap; });
+    $('#ct-zap').setAttribute('aria-label', 'Chamar a loja no WhatsApp: ' + zapBonito);
+  } else { $('#ct-zap').removeAttribute('href'); $('#util-zap').hidden = true; }
+  $('#ct-insta-txt').textContent = L.instagram ? '@' + L.instagram : '';
+  if (L.instagram) $('#ct-insta').href = 'https://instagram.com/' + L.instagram;
+  $('#ct-email').textContent = L.email || '';
+  $('#ct-site').textContent = L.site || '';
+
+  /* ---------- Indicação de afiliado: link da loja com #indica-CODIGO, guardada por 30 dias ---------- */
+  var CHAVE_IND = 'cabidino-indicacao', indicacao = null;
+  var acharAfiliado = function (cod) { return D.afiliados.filter(function (a) { return a.ativo !== false && String(a.codigo).toLowerCase() === String(cod).toLowerCase(); })[0]; };
+  (function () {
+    var m = /^#indica-([a-z0-9_.~-]+)$/i.exec(location.hash || '');
+    try {
+      if (m && acharAfiliado(m[1])) localStorage.setItem(CHAVE_IND, JSON.stringify({ codigo: m[1], ate: Date.now() + 30 * 864e5 }));
+      var s = JSON.parse(localStorage.getItem(CHAVE_IND) || 'null');
+      if (s && s.ate > Date.now()) indicacao = acharAfiliado(s.codigo) || null;
+    } catch (e) { if (m) indicacao = acharAfiliado(m[1]) || null; }
+    if (m && indicacao) setTimeout(function () { avisar('Que bom te ver! Você veio pela indicação de ' + indicacao.nome + ' 💗'); }, 800);
+  })();
+
+  /* ---------- Dino e Dina falantes ---------- */
+  var falas = D.falas.length ? D.falas : ['Oi! Eu sou o Dino.'];
+  var falaAtual = 0, balao = $('#balao');
+  function proximaFala() {
+    falaAtual = (falaAtual + 1) % falas.length;
+    balao.classList.add('trocando');
+    setTimeout(function () { balao.textContent = falas[falaAtual]; balao.classList.remove('trocando'); }, 250);
+  }
+  balao.textContent = falas[0];
+  var timerFala = setInterval(proximaFala, 5000);
+  $$('.falar').forEach(function (b) {
+    b.addEventListener('click', function () {
+      b.classList.remove('feliz'); void b.offsetWidth; b.classList.add('feliz');
+      clearInterval(timerFala); proximaFala(); timerFala = setInterval(proximaFala, 5000);
+    });
+  });
+
+  /* ---------- Fases ---------- */
+  $('#lista-fases').innerHTML = Object.keys(FAIXAS).map(function (k) {
+    var f = FAIXAS[k], qtd = P.filter(function (p) { return naFaixa(p, k); }).length;
+    var foto = f.foto ? '<img src="' + f.foto + '" alt="Modelo de ' + f.idade + ' com roupa da coleção" loading="lazy">' : '<svg viewBox="0 0 200 200" aria-hidden="true"><use href="#' + f.dino + '"/></svg>';
+    return '<button class="fase" type="button" data-faixa="' + k + '">' +
+      '<span class="fase-foto' + (f.foto ? '' : ' sem-foto') + '">' + foto +
+      (f.foto ? '<svg class="fase-dino" viewBox="0 0 200 200" aria-hidden="true"' + (f.dino === 'dina' ? ' style="transform:scaleX(-1)"' : '') + '><use href="#' + f.dino + '"/></svg>' : '') + '</span>' +
+      '<h3>' + f.nome + '</h3><span class="idade">' + f.idade + '</span>' +
+      '<span class="fase-qtd">' + qtd + (qtd === 1 ? ' peça' : ' peças') + '</span></button>';
+  }).join('');
+  $('#lista-fases').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-faixa]'); if (b) irParaFiltro(b.dataset.faixa);
+  });
+
+  /* ---------- Favoritos ---------- */
+  var CHAVE_FAV = 'cabidino-favoritos', favoritos = [];
+  try { favoritos = JSON.parse(localStorage.getItem(CHAVE_FAV)) || []; } catch (e) { favoritos = []; }
+  favoritos = favoritos.filter(function (id) { return porId[id]; });
+  function salvarFav() { try { localStorage.setItem(CHAVE_FAV, JSON.stringify(favoritos)); } catch (e) {} }
+  function atualizarContFav() { var c = $('#cont-fav'); c.textContent = favoritos.length; c.dataset.zero = String(!favoritos.length); }
+
+  /* ---------- Vitrine ---------- */
+  var filtro = 'todas', ordem = 'destaque', mostrar = 12, termo = '';
+  function desenharChips() {
+    var chips = [['todas', 'Todas']];
+    if (D.promocoes.some(vigente)) chips.push(['promo', 'Promoções']);
+    chips = chips.concat(Object.keys(FAIXAS).map(function (k) { return [k, FAIXAS[k].idade]; }));
+    if (favoritos.length || filtro === 'favoritos') chips.push(['favoritos', 'Favoritos (' + favoritos.length + ')']);
+    $('#chips').innerHTML = chips.map(function (c) {
+      return '<button class="chip" type="button" data-f="' + c[0] + '" aria-pressed="' + (filtro === c[0]) + '">' + c[1] + '</button>';
+    }).join('');
+  }
+  function listaAtual() {
+    var t = semAcento(termo.trim());
+    var l = P.filter(function (p) {
+      if (filtro === 'favoritos' && favoritos.indexOf(p.id) < 0) return false;
+      if (filtro === 'promo' && !descontoDe(p)) return false;
+      if (FAIXAS[filtro] && !naFaixa(p, filtro)) return false;
+      if (t) return semAcento(nomeCompleto(p) + ' ' + p.descricao + ' ' + p.cores.join(' ')).indexOf(t) > -1;
+      return true;
+    });
+    if (ordem === 'menor') l.sort(function (a, b) { return precoDe(a) - precoDe(b); });
+    if (ordem === 'maior') l.sort(function (a, b) { return precoDe(b) - precoDe(a); });
+    if (ordem === 'nome') l.sort(function (a, b) { return a.nome.localeCompare(b.nome, 'pt-BR'); });
+    l.sort(function (a, b) { return esgotada(a) - esgotada(b); });
+    return l;
+  }
+  function cardHTML(p) {
+    var fav = favoritos.indexOf(p.id) > -1, d = descontoDe(p), fora = esgotada(p);
+    var sub = parcelas > 1 ? 'Em até ' + parcelas + 'x de ' + brl(precoDe(p) / parcelas) + ' sem juros'
+                           : 'Tam. ' + p.tamanhos[0] + ' ao ' + p.tamanhos[p.tamanhos.length - 1];
+    var selo = fora ? '<span class="selo selo-esgotado">ESGOTADO</span>' : d ? '<span class="selo selo-promo">PROMO −' + d + '%</span>' : '<span class="selo">NOVIDADE</span>';
+    return '<article class="card' + (fora ? ' card-esgotado' : '') + '">' +
+      '<div class="card-foto">' +
+        '<button class="card-abrir" type="button" data-id="' + esc(p.id) + '" aria-label="Ver ' + esc(nomeCompleto(p)) + '"><img loading="lazy" src="' + esc(p.foto) + '" alt="' + esc(nomeCompleto(p)) + '"></button>' +
+        '<button class="fav" type="button" data-fav="' + esc(p.id) + '" aria-pressed="' + fav + '" aria-label="' + (fav ? 'Tirar dos' : 'Colocar nos') + ' favoritos"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-coracao"/></svg></button>' +
+        selo +
+        '<div class="card-tams" aria-hidden="true">' + p.tamanhos.map(function (t) { return '<span>' + t + '</span>'; }).join('') + '</div>' +
+      '</div>' +
+      '<button class="card-info" type="button" data-id="' + esc(p.id) + '">' +
+        '<span class="card-nome">' + esc(nomeCompleto(p)) + '</span>' +
+        '<span class="card-precos">' + precoHTML(p, 'card-preco') + '</span>' +
+        '<span class="card-sub"><span>' + sub + '</span><span class="bolinhas">' +
+          p.cores.map(function (c) { return '<span class="bolinha" title="' + esc(c) + '" style="background:' + fundoCor(c) + '"></span>'; }).join('') +
+        '</span></span>' +
+      '</button></article>';
+  }
+  function desenharGrade() {
+    var l = listaAtual(), v = l.slice(0, mostrar);
+    $('#grade').innerHTML = v.length ? v.map(cardHTML).join('') :
+      '<div class="vazio-vitrine"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#dino"/></svg><p>' +
+      (filtro === 'favoritos' ? 'Você ainda não tem favoritos. Toque no coração de uma peça para guardar aqui.' : 'O Dino procurou, mas não achou nenhuma peça assim. Tente outra palavra.') + '</p></div>';
+    $('#mostrando').textContent = v.length ? 'Mostrando ' + v.length + ' de ' + l.length + ' peças' : '';
+    $('#ver-mais').hidden = v.length >= l.length;
+    var rb = $('#resultado-busca');
+    rb.hidden = !termo.trim();
+    if (termo.trim()) {
+      rb.innerHTML = '';
+      var s = document.createElement('span'); s.textContent = l.length + (l.length === 1 ? ' resultado' : ' resultados') + ' para "' + termo.trim() + '"';
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = 'Limpar busca';
+      b.addEventListener('click', function () { termo = ''; $('#busca-campo').value = ''; desenharGrade(); });
+      rb.appendChild(s); rb.appendChild(b);
+    }
+  }
+  function irParaFiltro(f) {
+    filtro = f; mostrar = 12; desenharChips(); desenharGrade();
+    $('#vitrine').scrollIntoView({ behavior: 'smooth' });
+  }
+  $('#chips').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-f]'); if (!b) return;
+    filtro = b.dataset.f; mostrar = 12; desenharChips(); desenharGrade();
+  });
+  $('#ordem').addEventListener('change', function () { ordem = this.value; desenharGrade(); });
+  $('#ver-mais').addEventListener('click', function () { mostrar += 12; desenharGrade(); });
+  $('#grade').addEventListener('click', function (e) {
+    var f = e.target.closest('[data-fav]');
+    if (f) {
+      var id = f.dataset.fav, pos = favoritos.indexOf(id);
+      if (pos > -1) favoritos.splice(pos, 1); else favoritos.push(id);
+      salvarFav(); atualizarContFav();
+      var ligado = pos < 0;
+      f.setAttribute('aria-pressed', String(ligado)); f.setAttribute('aria-label', (ligado ? 'Tirar dos' : 'Colocar nos') + ' favoritos');
+      f.classList.remove('pulo'); void f.offsetWidth; f.classList.add('pulo');
+      avisar(ligado ? 'Guardado nos favoritos' : 'Tirado dos favoritos');
+      desenharChips(); if (filtro === 'favoritos') desenharGrade();
+      return;
+    }
+    var c = e.target.closest('[data-id]'); if (c) abrirProduto(c.dataset.id);
+  });
+  $$('.b-foto').forEach(function (b) {
+    b.addEventListener('click', function () { var p = porFoto(b.dataset.foto); if (p) abrirProduto(p.id); });
+  });
+  $('#ver-favoritos').addEventListener('click', function () { termo = ''; $('#busca-campo').value = ''; irParaFiltro('favoritos'); });
+  $('#busca').addEventListener('submit', function (e) {
+    e.preventDefault(); termo = $('#busca-campo').value; filtro = 'todas'; mostrar = 12; desenharChips(); desenharGrade();
+    $('#vitrine').scrollIntoView({ behavior: 'smooth' });
+  });
+  atualizarContFav(); desenharChips(); desenharGrade();
+
+  /* ---------- Janela do produto ---------- */
+  var jp = $('#janela-produto'), escolha = {};
+  function desenharOpcoes() {
+    var p = porId[escolha.id];
+    $('#jp-cores').innerHTML = p.cores.map(function (c) {
+      return '<button class="opcao" type="button" data-cor="' + esc(c) + '" aria-pressed="' + (c === escolha.cor) + '"><span class="bolinha" style="background:' + fundoCor(c) + '"></span>' + esc(c) + '</button>';
+    }).join('');
+    $('#jp-tams').innerHTML = p.tamanhos.map(function (t) {
+      var tem = estoqueDe(p, t, escolha.cor) > 0;
+      return '<button class="opcao' + (tem ? '' : ' opcao-esgotada') + '" type="button" data-tam="' + t + '" aria-pressed="' + (t === escolha.tam) + '"' + (tem ? '' : ' disabled aria-label="Tamanho ' + t + ' esgotado"') + '>' + t + '</button>';
+    }).join('');
+    $('#jp-qtd').textContent = escolha.qtd;
+    var t = escolha.tam, resta = t ? estoqueDe(p, t, escolha.cor) : 0;
+    $('#jp-dica').textContent = esgotada(p) ? 'Essa peça esgotou. Chame a loja no WhatsApp para saber quando volta!'
+      : t ? 'O tamanho ' + t + ' costuma servir para crianças de ' + (t <= 3 ? t + ' ano' + (t > 1 ? 's' : '') : (t - 1) + ' a ' + t + ' anos') + '.' + (resta && resta <= 2 ? ' Corre: só ' + (resta === 1 ? 'resta 1!' : 'restam ' + resta + '!') : '')
+      : 'Escolha um tamanho. Na dúvida, prefira o maior.';
+    $('#jp-add').disabled = esgotada(p);
+  }
+  function abrirProduto(id) {
+    var p = porId[id]; if (!p) return;
+    var corComEstoque = p.cores.filter(function (c) { return p.tamanhos.some(function (t) { return estoqueDe(p, t, c) > 0; }); })[0];
+    escolha = { id: id, cor: corComEstoque || p.cores[0], tam: null, qtd: 1 };
+    $('#jp-foto').src = p.foto; $('#jp-foto').alt = nomeCompleto(p);
+    $('#jp-faixa').textContent = IDADE_PRODUTO[p.idade] || '';
+    $('#jp-nome').textContent = p.nome;
+    $('#jp-preco').innerHTML = precoHTML(p, 'preco');
+    $('#jp-parcela').hidden = parcelas < 2;
+    $('#jp-parcela').textContent = parcelas > 1 ? 'Em até ' + parcelas + 'x de ' + brl(precoDe(p) / parcelas) + ' sem juros' : '';
+    $('#jp-desc').textContent = p.descricao || '';
+    desenharOpcoes();
+    jp.showModal();
+  }
+  jp.addEventListener('click', function (e) {
+    var b;
+    if (e.target === jp || e.target.closest('[data-fechar]')) return jp.close();
+    if ((b = e.target.closest('[data-cor]'))) { escolha.cor = b.dataset.cor; if (escolha.tam && estoqueDe(porId[escolha.id], escolha.tam, escolha.cor) < 1) escolha.tam = null; desenharOpcoes(); }
+    if ((b = e.target.closest('[data-tam]'))) { escolha.tam = Number(b.dataset.tam); escolha.qtd = Math.min(escolha.qtd, estoqueDe(porId[escolha.id], escolha.tam, escolha.cor)); desenharOpcoes(); }
+  });
+  $('#jp-menos').addEventListener('click', function () { escolha.qtd = Math.max(1, escolha.qtd - 1); desenharOpcoes(); });
+  $('#jp-mais').addEventListener('click', function () {
+    var lim = escolha.tam ? estoqueDe(porId[escolha.id], escolha.tam, escolha.cor) : 10;
+    if (escolha.qtd >= lim) avisar('Só temos ' + lim + ' desse tamanho'); escolha.qtd = Math.max(1, Math.min(10, lim, escolha.qtd + 1)); desenharOpcoes();
+  });
+  $('#jp-add').addEventListener('click', function () {
+    if (!escolha.tam) { avisar('Escolha um tamanho primeiro'); return; }
+    var p = porId[escolha.id], lim = estoqueDe(p, escolha.tam, escolha.cor);
+    var igual = sacola.filter(function (i) { return i.id === escolha.id && i.cor === escolha.cor && i.tam === escolha.tam; })[0];
+    var ja = igual ? igual.qtd : 0;
+    if (ja + escolha.qtd > lim) { avisar(lim - ja > 0 ? 'Só cabem mais ' + (lim - ja) + ' desse tamanho' : 'Você já pegou todas as peças desse tamanho'); return; }
+    if (igual) igual.qtd += escolha.qtd; else sacola.push({ id: escolha.id, cor: escolha.cor, tam: escolha.tam, qtd: escolha.qtd });
+    salvar(); desenharSacola(); jp.close(); avisar('Colocado na sacola');
+    var c = $('#contador'); c.classList.remove('pulo'); void c.offsetWidth; c.classList.add('pulo');
+  });
+
+  /* ---------- Sacola ---------- */
+  var CHAVE = 'cabidino-sacola', sacola = [], cupom = null;
+  try { sacola = JSON.parse(localStorage.getItem(CHAVE)) || []; } catch (e) { sacola = []; }
+  sacola = sacola.filter(function (i) { return porId[i.id] && porId[i.id].tamanhos.indexOf(i.tam) > -1; });
+  function salvar() { try { localStorage.setItem(CHAVE, JSON.stringify(sacola)); } catch (e) {} }
+  var js = $('#janela-sacola');
+  function acharCupom(cod) { return D.cupons.filter(function (c) { return String(c.codigo).toUpperCase() === String(cod).trim().toUpperCase(); })[0]; }
+  function descontoCupom(c, subtotal) {
+    if (!c) return 0;
+    var v = c.tipo === 'R$' ? Number(c.valor) : subtotal * Number(c.valor) / 100;
+    return Math.min(subtotal, Math.round(v * 100) / 100);
+  }
+  function validarCupom(c, subtotal) {
+    if (!c) return 'Esse cupom não existe. Confira se digitou certinho.';
+    if (!vigente(c)) return 'Esse cupom não está valendo agora.';
+    if (Number(c.minimo) && subtotal < Number(c.minimo)) return 'Esse cupom vale para compras a partir de ' + brl(c.minimo) + '.';
+    return '';
+  }
+
+  function desenharSacola() {
+    var subtotal = 0, pecas = 0;
+    sacola.forEach(function (i) { subtotal += precoDe(porId[i.id]) * i.qtd; pecas += i.qtd; });
+    if (cupom && validarCupom(cupom, subtotal)) cupom = null;
+    var desc = descontoCupom(cupom, subtotal), total = subtotal - desc;
+    $('#contador').textContent = pecas; $('#contador').dataset.zero = String(!pecas);
+    $('#subtotal').textContent = brl(subtotal);
+    $('#linha-desconto').hidden = !desc;
+    $('#valor-desconto').textContent = '− ' + brl(desc);
+    $('#nome-cupom').textContent = cupom ? cupom.codigo.toUpperCase() : '';
+    $('#linha-total').hidden = !desc;
+    $('#valor-total').textContent = brl(total);
+    $('#cupom-area').hidden = !sacola.length;
+
+    var falta = Math.max(0, freteGratis - total), pct = freteGratis ? Math.min(100, total / freteGratis * 100) : 100;
+    $('#frete-texto').innerHTML = falta > 0 ? 'Faltam <b>' + brl(falta) + '</b> para o frete grátis. O Dino já está a caminho!' : '<b>Oba! Você ganhou frete grátis.</b>';
+    $('#trilha-cheia').style.width = pct + '%';
+    $('#trilha-dino').style.left = Math.max(4, Math.min(94, pct)) + '%';
+
+    if (!sacola.length) {
+      $('#itens').innerHTML = '<div class="vazia"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#dino"/></svg>' +
+        '<p>Sua sacola está vazia.<br>Que tal dar uma olhada na coleção?</p></div>';
+    } else {
+      $('#itens').innerHTML = sacola.map(function (i, n) {
+        var p = porId[i.id];
+        return '<div class="item"><img src="' + esc(p.foto) + '" alt="">' +
+          '<div class="item-info"><b>' + esc(p.nome) + '</b><small>' + esc(i.cor) + ' · tam. ' + i.tam + '</small><span class="preco">' + brl(precoDe(p) * i.qtd) + '</span></div>' +
+          '<div class="item-lado"><div class="qtd"><button type="button" data-menos="' + n + '" aria-label="Diminuir">−</button><span>' + i.qtd + '</span>' +
+          '<button type="button" data-mais="' + n + '" aria-label="Aumentar">+</button></div>' +
+          '<button class="remover" type="button" data-remover="' + n + '">Remover</button></div></div>';
+      }).join('');
+    }
+
+    var fim = $('#finalizar'), semZap = !L.whatsapp;
+    $('#aviso-zap').hidden = !(semZap && sacola.length);
+    if (!sacola.length || semZap) { fim.setAttribute('aria-disabled', 'true'); fim.style.opacity = '.5'; fim.style.pointerEvents = 'none'; fim.href = '#'; }
+    else {
+      var msg = 'Olá, Cabidino! Quero fazer este pedido:\n\n' + sacola.map(function (i) {
+        var p = porId[i.id]; return '• ' + i.qtd + 'x ' + nomeCompleto(p) + ' (' + i.cor + ', tam. ' + i.tam + ') ' + brl(precoDe(p) * i.qtd);
+      }).join('\n') + '\n\nSubtotal: ' + brl(subtotal) +
+        (cupom ? '\nCupom: ' + cupom.codigo.toUpperCase() + ' (− ' + brl(desc) + ')\nTotal: ' + brl(total) : '') +
+        (indicacao ? '\nIndicação: ' + indicacao.nome + ' (' + indicacao.codigo + ')' : '');
+      fim.href = 'https://wa.me/' + L.whatsapp + '?text=' + encodeURIComponent(msg);
+      fim.removeAttribute('aria-disabled'); fim.style.opacity = ''; fim.style.pointerEvents = '';
+    }
+  }
+  $('#abrir-sacola').addEventListener('click', function () { js.showModal(); });
+  js.addEventListener('click', function (e) {
+    var b;
+    if (e.target === js || e.target.closest('[data-fechar]')) return js.close();
+    if ((b = e.target.closest('[data-mais]'))) {
+      var it = sacola[b.dataset.mais], lim = estoqueDe(porId[it.id], it.tam, it.cor);
+      if (it.qtd >= lim) { avisar('Só temos ' + lim + ' desse tamanho'); return; } it.qtd++;
+    }
+    else if ((b = e.target.closest('[data-menos]'))) { var i = sacola[b.dataset.menos]; i.qtd > 1 ? i.qtd-- : sacola.splice(b.dataset.menos, 1); }
+    else if ((b = e.target.closest('[data-remover]'))) sacola.splice(b.dataset.remover, 1);
+    else return;
+    salvar(); desenharSacola();
+  });
+  $('#cupom-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var subtotal = 0; sacola.forEach(function (i) { subtotal += precoDe(porId[i.id]) * i.qtd; });
+    var c = acharCupom($('#cupom-campo').value), erro = validarCupom(c, subtotal);
+    $('#cupom-msg').textContent = erro || 'Cupom aplicado! 🎉';
+    $('#cupom-msg').dataset.erro = String(!!erro);
+    cupom = erro ? null : c; desenharSacola();
+  });
+  desenharSacola();
+
+  /* ---------- Dicas do Dino (tamanho) ---------- */
+  function atualizarIdade() {
+    var idade = Number($('#idade').value), tam = tamanhoPara(idade), f = faixaPara(idade);
+    $('#idade-valor').textContent = idade;
+    // 1 ano = Dina pequenininha (45%), 14 anos = tamanho cheio
+    $('#dina-cresce').style.setProperty('--cresce', (.45 + (idade - 1) / 13 * .55).toFixed(3));
+    $('#res-tam').textContent = tam;
+    $('#res-faixa').textContent = FAIXAS[f].idade;
+    $('#balao-dica').textContent = 'Com ' + idade + (idade === 1 ? ' ano' : ' anos') + ', eu iria no tamanho ' + tam + '!';
+  }
+  $('#idade').addEventListener('input', atualizarIdade);
+  $('#ver-idade').addEventListener('click', function () { irParaFiltro(faixaPara(Number($('#idade').value))); });
+  atualizarIdade();
+
+  /* ---------- Aviso rápido ---------- */
+  var tt;
+  function avisar(t) {
+    var el = $('#toast'); el.textContent = t; el.classList.add('ver');
+    clearTimeout(tt); tt = setTimeout(function () { el.classList.remove('ver'); }, 2600);
+  }
+
+  /* ---------- Área da loja: só a equipe (dona ou editora do site) chega à tela de login do painel ---------- */
+  window.CABIDINO_SITE = { FAIXAS: FAIXAS, brl: brl, fundoCor: fundoCor, precoDe: precoDe, descontoDe: descontoDe, nomeCompleto: nomeCompleto, limparHTML: limparHTML, avisar: avisar };
+  (function () {
+    var temClaude = window.claude && typeof window.claude.use === 'function', N = window.CABIDINO_NUVEM;
+    /* no Supabase quem decide é o login do painel: qualquer pessoa chega à tela de login, e o banco só abre para a equipe */
+    var ehEquipe = N ? N.ehEquipe() : temClaude ? window.claude.use('user').then(function (u) {
+      if (!u) return false;
+      return u.canEdit().then(function (pode) { return pode ? true : u.isOwner(); });
+    }).catch(function () { return false; }) : Promise.resolve(false);
+    var podeEntrar = N ? Promise.resolve(true) : ehEquipe;
+    var carregar = function () {
+      if (window.PainelCabidino) return Promise.resolve(window.PainelCabidino);
+      return new Promise(function (ok, falha) {
+        var s = document.createElement('script'); s.src = 'painel.js'; s.onload = function () { ok(window.PainelCabidino); }; s.onerror = falha;
+        document.body.appendChild(s);
+      });
+    };
+    var aviso = $('#area-restrita');
+    aviso.addEventListener('click', function (e) { if (e.target === aviso || e.target.closest('[data-fechar]')) aviso.close(); });
+    function entrar(qual) {
+      podeEntrar.then(function (equipe) {
+        if (!equipe) { aviso.showModal(); return; }
+        carregar().then(function (pn) { pn.abrir(qual); }).catch(function () { avisar('Não consegui abrir o painel agora. Tente de novo.'); });
+      });
+    }
+    $('#area-loja').addEventListener('click', function (e) { e.preventDefault(); entrar(); });
+    var botaoTopo = $('#topo-painel');
+    botaoTopo.addEventListener('click', function () { entrar(); });
+    ehEquipe.then(function (equipe) { if (equipe) botaoTopo.hidden = false; });
+    var reabrir = null; try { reabrir = sessionStorage.getItem('cabidino-reabrir-painel'); sessionStorage.removeItem('cabidino-reabrir-painel'); } catch (e) {}
+    if (location.hash === '#painel' || (N && N.conta.veioDoEmail)) entrar();
+    else if (reabrir) ehEquipe.then(function (equipe) { if (equipe) entrar(reabrir); });
+    if (N) N.conta.aoRecuperar(function () { entrar(); });
+  })();
+});
+</script>
+</body>
+</html>
